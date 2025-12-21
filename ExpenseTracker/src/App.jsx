@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 pb-12">
+      <div className="min-h-screen bg-linear-to-br from-amber-50 to-orange-50 pb-12">
         < Header />
         < ExpenseForm onaddExpense = {addExpense} />
         < ExpenseList expenses = {expenses} onDeleteExpense= {deleteExpense} />
