@@ -4,12 +4,12 @@ function Header(){
     return(
         <header className="flex items-center gap-6 p-6 bg-white rounded-2xl shadow-sm border-gray-100 max-w-2xl mx-auto mt-10 overflow-hidden">
          <div className="shrink-0 flex items-center justify-center">
-            <img src={headerLogo} alt="Title Image" className="w-44 object-contain drop-shadow-md "/>
+            <img src={headerLogo} alt="Title Image" className="w-50 object-contain drop-shadow-md sm:w-26"/>
          </div>
 
          <div className="flex flex-col flex-1 justify-content">
-            <h1 className="text-center font-extrabold font-story text-4xl mt-6 text-amber-900">Expense Tracker</h1>
-            <p className="font-story text-2xl text-gray-500 text-center mt-1">Track your treasures, manage your joy!</p>
+            <h1 className="text-center font-extrabold font-story text-4xl mt-6 text-amber-900 sm:text-2xl">Expense Tracker</h1>
+            <p className="font-story text-2xl text-gray-500 text-center mt-1 sm:xl">Track your treasures, manage your joy!</p>
          </div>
         </header>
     );
