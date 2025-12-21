@@ -2,7 +2,7 @@
 import {useState} from 'react'
 import ErrorMessage from './ErrorMessage.jsx';
 
-function ExpenseForm(){
+function ExpenseForm({ onaddExpense}){
 
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("");
@@ -26,7 +26,7 @@ function ExpenseForm(){
             note
         };
 
-        console.log("Saved", expenseData);
+        onaddExpense(expenseData);
 
         setAmount("");
         setCategory("");
@@ -59,7 +59,7 @@ function ExpenseForm(){
              <input type="text" placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} className='flex-1 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover:border-amber-200 outline-none placeholder:text-gray-400'/>
             </div>
 
-            <button type="submit" className='cursor-pointer mt-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 rounded-2xl shadow-md transform active:scale-95 transition-all'>Add Expense</button>
+            <button type="submit" className='cursor-pointer mt-4 bg-linear-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 rounded-2xl shadow-md transform active:scale-95 transition-all'>Add Expense</button>
          </form>
         </div>
         </>
