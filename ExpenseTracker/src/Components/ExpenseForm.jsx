@@ -44,7 +44,7 @@ function ExpenseForm(){
          <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
             <input type="number" placeholder="Amount" value= {amount} onChange={(e) => setAmount(e.target.value)} className='p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 outline-none transition-all'/>
 
-            <select value={category} onChange={(e) => setCategory(e.target.value)} className='p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover: ring-mber-200 outline-none text-gray-600'>
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className='p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover:border-amber-200 outline-none text-gray-600'>
                 <option value="">Select category</option>
                 <option value="Food">Food</option>
                 <option value="Transportation">Transportation</option>
@@ -59,7 +59,7 @@ function ExpenseForm(){
              <input type="text" placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} className='flex-1 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover:border-amber-200 outline-none placeholder:text-gray-400'/>
             </div>
 
-            <button type="submit" className='mt-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 rounded-2xl shadow-md transform active:scale-95 transition-all'>Add Expense</button>
+            <button type="submit" className='cursor-pointer mt-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 rounded-2xl shadow-md transform active:scale-95 transition-all'>Add Expense</button>
          </form>
         </div>
         </>
