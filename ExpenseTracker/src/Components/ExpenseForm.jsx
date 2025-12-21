@@ -32,10 +32,13 @@ function ExpenseForm(){
     }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <input type="number" placeholder="Amount" value= {amount} onChange={(e) => setAmount(e.target.value)}/>
+        <div className="max-w-2xl mx-auto mt-12 p-8 bg-white rounded-3xl shadow-lg border border-amber-50">
+         <h2 className="text-3xl font-bold text-amber-900 mb-6 font-story">Add New</h2>
 
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <input type="number" placeholder="Amount" value= {amount} onChange={(e) => setAmount(e.target.value)} className='p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 outline-none transition-all'/>
+
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className='p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover: ring-mber-200 outline-none text-gray-600'>
                 <option value="">Select category</option>
                 <option value="Food">Food</option>
                 <option value="Transportation">Transportation</option>
@@ -44,13 +47,15 @@ function ExpenseForm(){
                 <option value="Shopping">Shopping</option>
                 <option value="Other">Other</option>
             </select>
+            <div className="flex gap-4">
+             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className='flex-1 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover:border-amber-200 outline-none text-gray-600'/>
 
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)}/>
+             <input type="text" placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} className='flex-1 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-400 hover:border-amber-200 outline-none placeholder:text-gray-400'/>
+            </div>
 
-            <input type="text" placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)}/>
-
-            <button type="submit">Add Expense</button>
-        </form>
+            <button type="submit" className='mt-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 rounded-2xl shadow-md transform active:scale-95 transition-all'>Add Expense</button>
+         </form>
+        </div>
     );
 };
 
