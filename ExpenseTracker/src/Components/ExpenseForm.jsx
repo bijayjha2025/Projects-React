@@ -8,8 +8,31 @@ function ExpenseForm(){
     const [date, setDate] = useState("");
     const [note, setNote] = useState("");
 
+    const handleSubmit= (e) => {
+        e.preventDefault();
+
+        if (!amount || !category || !date){
+            alert("Please fill all required fields");
+            return;
+        }
+
+        const expenseData = {
+            amount: Number(amount),
+            category,
+            date,
+            note
+        };
+
+        console.log("Saved", expenseData);
+
+        setAmount("");
+        setCategory("");
+        setDate("");
+        setNote("");
+    }
+
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <input type="number" placeholder="Amount" value= {amount} onChange={(e) => setAmount(e.target.value)}/>
 
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
