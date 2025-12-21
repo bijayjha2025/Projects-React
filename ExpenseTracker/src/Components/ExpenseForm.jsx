@@ -1,5 +1,6 @@
 
 import {useState} from 'react'
+import ErrorMessage from './ErrorMessage.jsx';
 
 function ExpenseForm(){
 
@@ -7,12 +8,14 @@ function ExpenseForm(){
     const [category, setCategory] = useState("");
     const [date, setDate] = useState("");
     const [note, setNote] = useState("");
+    const [showError, setshowError] = useState(false);
 
     const handleSubmit= (e) => {
         e.preventDefault();
 
         if (!amount || !category || !date){
-            alert("Please fill all required fields");
+            setshowError(true);
+            setTimeout(() => setshowError(false), 3000);
             return;
         }
 
@@ -32,6 +35,9 @@ function ExpenseForm(){
     }
 
     return(
+        <>
+        {showError && <ErrorMessage message= "Fill all required fields" onClose={() => setshowError(false)} /> }
+
         <div className="max-w-2xl mx-auto mt-12 p-8 bg-white rounded-3xl shadow-lg border border-amber-50">
          <h2 className="text-3xl font-bold text-amber-900 mb-6 font-story">Add New</h2>
 
@@ -56,6 +62,7 @@ function ExpenseForm(){
             <button type="submit" className='mt-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 rounded-2xl shadow-md transform active:scale-95 transition-all'>Add Expense</button>
          </form>
         </div>
+        </>
     );
 };
 
