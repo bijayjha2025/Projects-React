@@ -2,7 +2,7 @@
 function ExpenseItem({ expense, onDelete }){
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric' });
+        return date.toLocaleDateString('en-NP', {month: 'short', day: 'numeric', year: 'numeric' });
     }
     return(
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex items-center justify-between group">
@@ -15,7 +15,7 @@ function ExpenseItem({ expense, onDelete }){
          </div>
 
          <div className="flex items-center gap-4">
-          <span className="text-2xl font-bold text-amber-900 font-story">${expense.amount.toFixed(2)}</span>
+          <span className="text-2xl font-bold text-amber-900 font-story">Rs. {expense.amount.toFixed(2)}</span>
            <button onClick={()=> onDelete(expense.id)} className="opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer">Delete</button>
          </div>
     

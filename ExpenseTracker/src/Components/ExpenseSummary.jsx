@@ -28,19 +28,19 @@ function ExpenseSummary({expenses}){
     }
 
     return(
-        <div>
-            <div>
-                <p>Total Spending</p>
-                <p>${totalSpending.toFixed(2)}</p>
+        <div className="max-w-2xl mx-auto mt-8 p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-lg border border-amber-100">
+            <div className="text-center mb-8">
+                <p className="text-gray-600 text-lg mb-2 font-story">Total Spending</p>
+                <p className="text-5xl font-bond text-amber-900 font-story">Rs. {totalSpending.toFixed(2)}</p>
             </div>
 
             <div>
-                <h3>Spending by category</h3>
-                <div> {categoriesPercentage.map(({ category, amount, percentage}) => (
+                <h3 className="text-xl font-bold text-amber-900 mb-4 font-story">Spending by category</h3>
+                <div className="space-y-4"> {categoriesPercentage.map(({ category, amount, percentage}) => (
                     <div key={category}>
-                        <div>
-                            <span>{category}</span>
-                            <span>{amount.toFixed(2)}</span>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-gray-700 font-medium">{category}</span>
+                            <span className="text-gray-900 font-bold">{amount.toFixed(2)}</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                             <div className={`h-full ${categoryColors[category]} rounded-full transition-all duration-500`}
