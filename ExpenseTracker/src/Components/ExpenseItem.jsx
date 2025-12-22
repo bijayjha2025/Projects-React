@@ -1,3 +1,4 @@
+import { FormatCurrency } from "../Utilities/formatCurrency";
 
 function ExpenseItem({ expense, onDelete }){
     const formatDate = (dateString) => {
@@ -15,7 +16,7 @@ function ExpenseItem({ expense, onDelete }){
          </div>
 
          <div className="flex items-center gap-4">
-          <span className="text-2xl font-bold text-amber-900 font-story">Rs. {expense.amount.toFixed(2)}</span>
+          <span className="text-2xl font-bold text-amber-900 font-story">Rs. {FormatCurrency(expense.amount)}</span>
            <button onClick={()=> onDelete(expense.id)} className="opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer">Delete</button>
          </div>
     
