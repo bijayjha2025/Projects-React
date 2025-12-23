@@ -25,9 +25,12 @@ function App() {
     <>
       <div className="min-h-screen bg-linear-to-br from-amber-50 to-orange-50 pb-12">
         < Header />
-        < ExpenseForm onaddExpense = {addExpense} />
-        < ExpenseSummary expenses={expenses} />
-        < ExpenseList expenses = {expenses} onDeleteExpense= {deleteExpense} />
+
+        <div className="max-w-2xl mx-auto mt-8 space-y-6">
+         < ExpenseForm onaddExpense = {addExpense} />
+         < ExpenseSummary expenses={expenses} />
+         < ExpenseList expenses = {expenses} onDeleteExpense= {deleteExpense} />
+        </div>
       </div>
     </>
   )

@@ -1,5 +1,5 @@
 
-import { FormatCurrency } from "../Utilities/formatCurrency";
+import { FormatCurrency } from "../Utilities/FormatCurrency";
 
 function ExpenseSummary({expenses}){
 
@@ -30,14 +30,9 @@ function ExpenseSummary({expenses}){
     }
 
     return(
-        <div className="max-w-2xl mx-auto mt-8 p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-lg border border-amber-100">
-            <div className="text-center mb-8">
-                <p className="text-gray-600 text-lg mb-2 font-story">Total Spending</p>
-                <p className="text-5xl font-bold text-amber-900 font-story">Rs. {FormatCurrency(totalSpending)}</p>
-            </div>
-
-            <div>
-                <h3 className="text-xl font-bold text-amber-900 mb-4 font-story">Spending by category</h3>
+        <div className="p-8 bg-white rounded-3xl shadow-lg border border-amber-100">
+            <div className="mb-8">
+                <h3 className="text-2xl font-bold text-amber-900 mb-4 font-story">Spending by category</h3>
                 <div className="space-y-4"> {categoriesPercentage.map(({ category, amount, percentage}) => (
                     <div key={category}>
                         <div className="flex justify-between items-center mb-2">
@@ -46,13 +41,15 @@ function ExpenseSummary({expenses}){
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                             <div className={`h-full ${categoryColors[category]} rounded-full transition-all duration-500`}
-                            style={{width: `${percentage}%`}}
-                            />
-                        </div>
+                            style={{width: `${percentage}%`}}/></div>
                         <p className="text-sm text-gray-500 mt-1 text-right">{percentage.toFixed(1)}%</p>
-                        </div>      
-                ))}
+                        </div>      ))}
                 </div>
+            </div>
+
+            <div className="text-center pt-6 border-t-2 border-amber-200">
+                <p className="text-gray-600 text-lg mb-2 font-story">Total Spending</p>
+                <p className="text-4xl font-bold text-amber-900 font-story">Rs. {FormatCurrency(totalSpending)}</p>
             </div>
         </div>
     );

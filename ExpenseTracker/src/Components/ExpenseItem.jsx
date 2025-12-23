@@ -1,4 +1,4 @@
-import { FormatCurrency } from "../Utilities/formatCurrency";
+import { FormatCurrency } from "../Utilities/FormatCurrency.jsx";
 
 function ExpenseItem({ expense, onDelete }){
     const formatDate = (dateString) => {
