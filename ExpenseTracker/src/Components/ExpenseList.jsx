@@ -1,7 +1,7 @@
 
 import ExpenseItem from "./ExpenseItem.jsx";
 
-function ExpenseList({ expenses, onDeleteExpense}){
+function ExpenseList({ expenses, onDeleteExpense, onClearAll}){
     if(expenses.length === 0){
         return(
           <div className="p-12 bg-white rounded-3xl shadow-lg border border-amber-50 text-center">
@@ -12,7 +12,11 @@ function ExpenseList({ expenses, onDeleteExpense}){
 
     return(
       <div>
-      <h2 className="text-2xl font-bold text-amber-900 mb-4 font-story px-2">Your Expenses</h2>
+        <div className="flex justify-between items-center mb-4 px-2">
+        <h2 className="text-2xl font-bold text-amber-900 mb-4 font-story px-2">Your Expenses</h2>
+        <button onClick={onClearAll} className="text-sm text-red-600 hover:text-red-700 font-medium cursor-pointer">Clear All</button>
+        </div>
+
         <div className="flex flex-col gap-3">
          {expenses.map(expense => (
          <ExpenseItem key={expense.id} expense={expense} onDelete={onDeleteExpense} />
