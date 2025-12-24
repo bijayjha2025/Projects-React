@@ -1,6 +1,6 @@
 import { FormatCurrency } from "../Utilities/FormatCurrency.jsx";
 
-function ExpenseItem({ expense, onDelete }){
+function ExpenseItem({ expense, onDelete, onEdit }){
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-NP', {month: 'short', day: 'numeric', year: 'numeric' });
@@ -17,9 +17,14 @@ function ExpenseItem({ expense, onDelete }){
 
          <div className="flex items-center gap-4">
           <span className="text-2xl font-bold text-amber-900 font-story">Rs. {FormatCurrency(expense.amount)}</span>
-           <button onClick={()=> onDelete(expense.id)} className="opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer">Delete</button>
+           
+          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button onClick={()=> onEdit(expense)} className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer">Edit</button>
+
+            <button onClick={()=> onDelete(expense.id)} className="opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer">Delete</button>
+
+          </div>
          </div>
-    
         </div>
     );
 }

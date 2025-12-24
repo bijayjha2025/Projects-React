@@ -1,7 +1,7 @@
 
 import ExpenseItem from "./ExpenseItem.jsx";
 
-function ExpenseList({ expenses, onDeleteExpense, onClearAll}){
+function ExpenseList({ expenses, onDeleteExpense, onEditExpense, onClearAll}){
     if(expenses.length === 0){
         return(
           <div className="p-12 bg-white rounded-3xl shadow-lg border border-amber-50 text-center">
@@ -19,7 +19,7 @@ function ExpenseList({ expenses, onDeleteExpense, onClearAll}){
 
         <div className="flex flex-col gap-3">
          {expenses.map(expense => (
-         <ExpenseItem key={expense.id} expense={expense} onDelete={onDeleteExpense} />
+         <ExpenseItem key={expense.id} expense={expense} onDelete={onDeleteExpense} onEdit = {onEditExpense} />
          ))}
         </div>
       </div>

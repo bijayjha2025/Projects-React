@@ -13,6 +13,8 @@ function App() {
     return savedExpenses ? JSON.parse(savedExpenses) : [];
   });
 
+  const [editingExpense, setEditingExpense] = useState(null);
+
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses));
   }, [expenses]);
@@ -25,6 +27,13 @@ function App() {
     setExpenses([newExpense, ...expenses]);
   }
 
+  const updateExpense = (id, updatedData) => {
+    setExpenses(expenses.map(expense => 
+      expense.id === id ? {...expense, ...updatedData} : expense
+    ));
+    setEditingExpense(null);
+  }
+
   const deleteExpense = (id) => {
     setExpenses(expenses.filter(expense => expense.id !== id));
   } 
@@ -35,15 +44,24 @@ function App() {
     }
   }
 
+  const startEdit = (expense) => {
+    setEditingExpense(expense);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const cancelEdit = () => {
+    setEditingExpense(null);
+  }
+
   return (
     <>
-      <div className="min-h-screen bg-linear-to-br from-amber-50 to-orange-50 pb-12">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 pb-12">
         < Header />
 
         <div className="max-w-2xl mx-auto mt-8 space-y-6">
-         < ExpenseForm onaddExpense = {addExpense} />
+         < ExpenseForm onAddExpense = {addExpense} onUpdateExpense = {updateExpense} editingExpense = {editingExpense} onCancelEdit= {cancelEdit}/>
          < ExpenseSummary expenses={expenses} />
-         < ExpenseList expenses = {expenses} onDeleteExpense= {deleteExpense} onClearAll={clearAllExpenses}/>
+         < ExpenseList expenses = {expenses} onDeleteExpense= {deleteExpense} onEditExpense = {startEdit} onClearAll={clearAllExpenses}/>
         </div>
       </div>
     </>
