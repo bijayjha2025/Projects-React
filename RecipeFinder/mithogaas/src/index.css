@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&family=Story+Script&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --font-share: "Share Tech", sans-serif;
+    --font-story: "Story Script", cursive;
+}
+
+@layer base {
+    body {
+        @apply bg-gray-50 text-gray-900 transition-colors duration-200;
+    }
+}
