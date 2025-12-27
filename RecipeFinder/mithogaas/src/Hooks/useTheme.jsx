@@ -1,10 +1,9 @@
-import { BrowserRouter as Routes, Router, Route, Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
- 
-    export const useTheme = () => {
-    const[theme, setTheme] = useState(() => {
-        return localStorage.getItem("theme") || "light";
-    })
+
+export const useTheme = () => {
+
+    const [theme, setTheme] = useState('light');
 
     useEffect(() => {
         const root = document.documentElement;
@@ -14,13 +13,11 @@ import { useEffect, useState } from "react";
         }else{
             root.classList.remove("dark");
         }
-
-        localStorage.setItem("theme", theme);
     }, [theme]);
 
     const toggleTheme = () => {
         setTheme(prev => (prev === "light" ? "dark" : "light"));
-    }
+    };
 
     return { theme, toggleTheme };
 }

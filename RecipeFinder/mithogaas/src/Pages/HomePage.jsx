@@ -7,13 +7,12 @@ function HomePage(){
   <div className="flex flex-col">
    <section style={{backgroundImage: `url(${myBanner})`, backgroundSize: "cover", backgroundPosition: "center"}} className="relative h-96 w-full flex items-center justify-center">
 
-    <div className="absolute inset-0 bg-black/60 font-share">
+    <div className="absolute inset-0 bg-black/40 dark:bg-black/70"></div>
       <div className="relative z-10 max-w-3xl px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white">Discover recipes that inspire</h1>
-        <p className="mt-4 text-lg text-gray-200">Search, explore and save delicious recipes from around the world all in one place</p>
-        <button className='mt-6 px-6 py-3 rounded bg-[#a7f1a0] text-black font-semibold hover:bg-[#58e633] cursor-pointer'>Start Exploring</button>
+        <h1 className="text-4xl md:text-5xl font-bold text-white font-share">Discover recipes that inspire</h1>
+        <p className="mt-4 text-lg text-gray-200 font-share">Search, explore and save delicious recipes from around the world all in one place</p>
+        <button className='mt-6 px-6 py-3 rounded bg-[#a7f1a0] text-black font-semibold hover:bg-[#58e633] cursor-pointer font-share'>Start Exploring</button>
       </div>
-    </div>
     </section>
 
     <section className='py-16 px-6 max-w-6xl mx-auto'>
