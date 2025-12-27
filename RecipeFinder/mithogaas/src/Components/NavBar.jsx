@@ -1,12 +1,14 @@
 
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 function NavBar(){
     return(
-        <nav>
-         <div>
-            <div>For logo</div>
-            <div>other contents</div>
-         </div>
-        </nav>
+     <nav>
+      <div>
+      <div>
+    </div>
+    </div>
+    </nav>
     );
 }
 
