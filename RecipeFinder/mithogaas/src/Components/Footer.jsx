@@ -1,10 +1,8 @@
 
 function Footer(){
     return(
-        <footer>
-            <div>
-                <p>This is for footer</p>
-            </div>
+        <footer className="bg-[#e7f7e5] py-6 mt-16">
+            <p className="text-center text-sm font-semibold">© 2025 मीठो गाँस · Powered using API</p>
         </footer>
     );
 }
