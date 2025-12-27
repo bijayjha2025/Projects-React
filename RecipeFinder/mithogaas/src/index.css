@@ -15,3 +15,18 @@
   font-family: "Story Script", cursive;
 }
 }
+
+@layer base {
+  html.dark body {
+    background-color: #030712;
+    color: #f9fafb;
+  }
+
+  html.dark nav {
+    background-color: #111827;
+  }
+
+  html.dark footer {
+    background-color: #14532d;
+  }
+}

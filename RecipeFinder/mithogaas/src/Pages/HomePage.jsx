@@ -7,7 +7,7 @@ function HomePage(){
   <div className="flex flex-col">
    <section style={{backgroundImage: `url(${myBanner})`, backgroundSize: "cover", backgroundPosition: "center"}} className="relative h-96 w-full flex items-center justify-center">
 
-    <div className="absolute inset-0 bg-black/40 dark:bg-black/70"></div>
+    <div className="absolute inset-0 bg-black/40"></div>
       <div className="relative z-10 max-w-3xl px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-white font-share">Discover recipes that inspire</h1>
         <p className="mt-4 text-lg text-gray-200 font-share">Search, explore and save delicious recipes from around the world all in one place</p>
