@@ -5,18 +5,18 @@ function HomePage(){
 
  return(
   <div className="flex flex-col">
-   <section style={{backgroundImage: `url(${myBanner})`, backgroundSize: "cover", backgroundPosition: "center"}} className="h-96 w-full flex items-center justify-center">
+   <section style={{backgroundImage: `url(${myBanner})`, backgroundSize: "cover", backgroundPosition: "center"}} className="relative h-96 w-full flex items-center justify-center">
 
     <div className="absolute inset-0 bg-black/60 font-share">
-      <div className="relative z-10 max-w-3xl px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white">Discover recipes that inspires</h1>
+      <div className="relative z-10 max-w-3xl px-4 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-white">Discover recipes that inspire</h1>
         <p className="mt-4 text-lg text-gray-200">Search, explore and save delicious recipes from around the world all in one place</p>
         <button className='mt-6 px-6 py-3 rounded bg-[#a7f1a0] text-black font-semibold hover:bg-[#58e633] cursor-pointer'>Start Exploring</button>
       </div>
     </div>
     </section>
 
-    <section className='py-16 px-6 max-w-6xl mx-ato'>
+    <section className='py-16 px-6 max-w-6xl mx-auto'>
      <h2 className='text-3xl font-bold text-center mb-6 font-share'>About <span className='bg-[#a7f1a0]'>मीठो गाँस</span></h2>
      <p className="text-center text-gray-600 max-w-3xl mx-auto font-share">
         <span className='font-extrabold bg-[#a7f1a0]'>मीठो गाँस</span> helps you explore a wide variety of meals using a
@@ -26,7 +26,7 @@ function HomePage(){
     </section>
 
     <section className="py-16 bg-[#a7f1a0]">
-     <div className="max-w-auto mx-auto px-6">
+     <div className="w-full mx-auto px-6">
       <h2 className="text-3xl text-center mb-10 font-share font-extrabold">Features</h2>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

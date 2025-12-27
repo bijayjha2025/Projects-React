@@ -1,13 +1,10 @@
 
-import React from "react";
-
-function Favorites(){
+const Favorites = () => {
     return(
-        <div>
-            <h1>Favorites</h1>
-            <p>Saved recipes will appear here</p>
-
-        </div>
+     <div>
+        <h1>Your Favorites</h1>
+        <p>Your saved recipes </p>
+     </div>
     );
 }
 

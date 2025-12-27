@@ -10,14 +10,14 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className="min-h-screen flex flex-col">
         <NavBar/>
 
-        <main>
+        <main className="flex-grow">
           <Routes>
-            <Route path = "/" element ={<HomePage/>} />
-            <Route path="" element={<RecipeDetail/> } />
-            <Route path="" element={<Favorites/> } />
+            <Route path = "/" element ={<HomePage />} />
+            <Route path="/recipe:id" element={<RecipeDetail />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </main>
 
