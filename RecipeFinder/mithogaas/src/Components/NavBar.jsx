@@ -1,14 +1,21 @@
 
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-function NavBar(){
+import { useTheme } from '../Hooks/useTheme.jsx'
+
+const NavBar = () => {
+  const {theme, toggleTheme} = useTheme();
+
     return(
      <nav>
+      <Link to="/">RecipeFinder</Link>
+
       <div>
-      <div>
-    </div>
-    </div>
-    </nav>
+        <Link to="/favorites">Favorites</Link>
+
+        <button onClick={toggleTheme}>{theme === "light" ? "Dark" : "Light"}</button>
+      </div>
+     </nav>
     );
 }
 
