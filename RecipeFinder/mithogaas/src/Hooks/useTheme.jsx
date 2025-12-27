@@ -1,6 +1,5 @@
 import { BrowserRouter as Routes, Router, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import myBanner from '../assets/Images/Banner.jpg';
  
     export const useTheme = () => {
     const[theme, setTheme] = useState(() => {
