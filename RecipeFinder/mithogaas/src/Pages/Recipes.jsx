@@ -1,12 +1,12 @@
 import SearchBar from '../Components/SearchBar.jsx';
 import RecipeCard from '../Components/RecipeCard.jsx';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const Recipes = () => {
     const[recipes, setRecipes] = useState([]);
     const[loading, setLoading] = useState(false);
 
-    const handleSearch = async (query) => {
+    const handleSearch = useCallback(async (query) => {
         setLoading(true);
         try{
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
@@ -17,7 +17,7 @@ const Recipes = () => {
         }finally{
             setLoading(false);
         }
-    };
+    }, []);
 
     return(
         <div className='py-8'>
