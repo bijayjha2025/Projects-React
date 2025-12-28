@@ -5,6 +5,7 @@ import RecipeDetail from "./Pages/RecipeDetail.jsx";
 import Favorites from "./Pages/Favorites.jsx";
 import NavBar from "./Components/NavBar.jsx";
 import Footer from "./Components/Footer.jsx";
+import Recipes from "./Pages/Recipes.jsx";
 import { useTheme } from "./Hooks/useTheme.jsx";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path = "/" element ={<HomePage />} />
+            <Route path="/recipes" element = {<Recipes /> } />
             <Route path="/recipe/:id" element={<RecipeDetail />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
