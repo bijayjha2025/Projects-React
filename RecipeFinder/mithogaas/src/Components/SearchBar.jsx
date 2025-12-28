@@ -15,9 +15,9 @@ const SearchBar = ({ onSearch }) => {
 
     return(
         <div className='max-w-2xl mx-auto px-4'>
-            <input type='text' value={query} onChange={(e) => setQuery(e.target.value)} placeholder='Search recipes' className='w-full px-6 py-3 rounded-lg border-gray-300 focus:outline-none focus:border-[#58e633]'/>
+            <input type='text' value={query} onChange={(e) => setQuery(e.target.value)} placeholder='Search recipes' className='w-full px-6 py-3 rounded-lg border-gray-300 border-2 focus:outline-none focus:border-[#58e633] font-share'/>
         </div>
     );
 };
 
-export default SearchBar
+export default SearchBar;

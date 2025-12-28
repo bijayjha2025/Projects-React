@@ -28,7 +28,7 @@ const Recipes = () => {
                     <p className='text-center mt-8 font-share'>Loading...</p>
                 )}
             
-            <div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto px-4 mt-8">
                 { recipes.map(recipe => (
                     <RecipeCard key={recipe.idMeal} recipe={recipe} />
                 ))}
