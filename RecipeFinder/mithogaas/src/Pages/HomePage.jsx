@@ -13,7 +13,7 @@ function HomePage(){
         <h1 className="text-4xl md:text-5xl font-bold text-white font-share">Discover recipes that inspire</h1>
         <p className="mt-4 text-lg text-gray-200 font-share">Search, explore and save delicious recipes from around the world all in one place</p>
         <Link to="/recipes" className='mt-6 px-6 py-3 rounded 
-        bg-[#a7f1a0] text-black font-semibold hover:bg-[#58e633] cursor-pointer inline-block'>Start Exploring</Link>
+        bg-[#a7f1a0] text-black font-semibold hover:bg-[#58e633] cursor-pointer inline-block font-share'>Start Exploring</Link>
       </div>
     </section>
 
