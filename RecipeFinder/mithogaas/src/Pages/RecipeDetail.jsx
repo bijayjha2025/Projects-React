@@ -1,10 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
+import { useFavorites } from "../Hooks/useFavorites.jsx";
 
 const RecipeDetail = () => {
     const {id} = useParams();
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const {toggleFavorite, isFavorite} = useFavorites();
 
     useEffect(() => {
         const fetchRecipeDetail = async() => {
@@ -49,7 +52,7 @@ const RecipeDetail = () => {
             </div>
         );}
 
-
+        const isRecipeFavorite = isFavorite(recipe.idMeal);
     return(
         <div className="max-w-5xl mx-auto px-4 py-8">
           <Link to="/recipes" className="inline-flex items-center text-gray-700 hover:text-[#58e633] mb-6 font-share font-semibold">← Back to Recipes</Link>
@@ -95,9 +98,18 @@ const RecipeDetail = () => {
                  </div> )}
 
                 <div className="flex gap-4 mt-8">
-                 <button className="flex-1 px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded hover:bg-[#58e633] transition-colors font-share">Add to Favorites</button>
+                 <button onClick={() => {
+                  console.log('Button clicked!', recipe);
+                  toggleFavorite(recipe);}}
+                  className="flex-1 px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded hover:bg-[#58e633] transition-colors font-share flex items-center justify-center gap-2 cursor-pointer"
+                  style={{
+                    backgroundColor: isRecipeFavorite ? '#ef4444' : '#a7f1a0',
+                    color: isRecipeFavorite ? 'white' : 'black' }}>
+                    {isRecipeFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                 </button>
                  {recipe.strSource && (
-                  <a href={recipe.strSource} target="_blank" rel="noopener noreferrer" className="flex-1 px-6 py-3 bg-gray-200 text-gray-900 font-semibold rounded hover:bg-gray-300 transition-colors text-center font-share">View Source</a>)}
+                  <a href={recipe.strSource} target="_blank" rel="noopener noreferrer" className="flex-1 px-6 py-3 bg-gray-200 text-gray-900 font-semibold rounded hover:bg-gray-300 transition-colors text-center font-share">View Source</a>
+                  )}
                 </div>
               </div>
             </div>

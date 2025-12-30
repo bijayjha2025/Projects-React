@@ -7,12 +7,14 @@ import NavBar from "./Components/NavBar.jsx";
 import Footer from "./Components/Footer.jsx";
 import Recipes from "./Pages/Recipes.jsx";
 import { useTheme } from "./Hooks/useTheme.jsx";
+import { FavoritesProvider } from "./Hooks/useFavorites.jsx";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Router>
+    <FavoritesProvider>
+     <Router>
       <div className="min-h-screen flex flex-col">
         <NavBar theme={theme} toggleTheme={toggleTheme}/>
 
@@ -27,7 +29,8 @@ function App() {
 
         <Footer />
       </div>
-    </Router>
+     </Router>
+    </FavoritesProvider>
   )
 }
 
