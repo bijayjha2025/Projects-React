@@ -1,9 +1,9 @@
 
 function Footer(){
     return(
-        <footer className="bg-[#a7f1a0] py-6">
-            <p className="text-center text-sm font-semibold">© 2025 मीठो गाँस · Powered using API</p>
-        </footer>
+    <footer className="py-5 bg-gray-900 text-gray-300 text-center">
+       <p className="font-share">© {new Date().getFullYear()} मीठो गाँस. All rights reserved.</p>
+    </footer>
     );
 }
 
