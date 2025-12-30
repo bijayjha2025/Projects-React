@@ -1,5 +1,6 @@
 
 import myBanner from '../assets/Images/Banner.jpg';
+import myLogo from '../assets/Images/Logo.png'
 import { Link } from 'react-router-dom'
 
 function HomePage(){
@@ -19,14 +20,23 @@ function HomePage(){
 
     <section className='py-16 px-6 max-w-6xl mx-auto'>
      <h2 className='text-3xl font-bold text-center mb-6 font-share'>About <span className='bg-[#a7f1a0]'>मीठो गाँस</span></h2>
-     <p className="text-center text-gray-600 max-w-3xl mx-auto font-share">
+
+     <div className='flex flex-col md:flex-row items-center justify-center gap-10'>
+        <div className="md:w-1/2 text-center md:text-left">
+        <p className="text-center text-gray-600 max-w-3xl mx-auto font-share">
         <span className='font-extrabold bg-[#a7f1a0]'>मीठो गाँस</span> helps you explore a wide variety of meals using a
         powerful public API. Whether you're a student, home cook, or food
         enthusiast, you can quickly find recipes, view details, and save your
         favorites.</p>
+        </div>
+
+        <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center bg-white shadow-md">
+        <img src={myLogo} alt="Mithogaas logo" className='w-48 h-48 object-contain rounded'/>
+        </div>
+     </div>
     </section>
 
-    <section className="py-16 bg-[#a7f1a0]">
+    <section>
      <div className="w-full mx-auto px-6">
       <h2 className="text-3xl text-center mb-10 font-share font-extrabold">Features</h2>
 
