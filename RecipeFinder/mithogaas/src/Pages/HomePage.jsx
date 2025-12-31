@@ -55,8 +55,21 @@ function HomePage(){
 
    <section className='py-10 bg-white'>
     <div className='max-w-6xl mx-auto px-6 text-center'>
-      <h2 className='text-3xl font-extrabold font-share mb-3'>What Our Users Say</h2>
-      <p className='text-gray-600 max-w-2xl mx-auto mb-12 font-share'>Hear from people who love exploring recipes with मीठो गाँस.</p>
+      <h2 className='text-3xl font-extrabold font-share mb-12'>Impact of <span className="bg-[#a7f1a0]">मीठो गाँस</span> in Numbers</h2>
+      <div className='grid gap-10 sm:grid-cols-3'>
+        <StatCard number="5,000+" label="Active Users" />
+        <StatCard number="12,000+" label="Recipes Searched" />
+        <StatCard number="4.5/5 ⭐" label="Average Ratings" />
+      </div>
+    </div>
+
+   </section>
+
+   <section className='py-10 bg-white'>
+    <div className='max-w-6xl mx-auto px-6 text-center'>
+      <h2 className='text-3xl font-extrabold font-share mb-3'>What <span className="bg-[#a7f1a0]">मीठो गाँस</span> Users are Saying</h2>
+      <p className='text-gray-600 max-w-2xl mx-auto mb-2 font-share'>Hear from people who love exploring recipes with <span className="bg-[#a7f1a0]">मीठो गाँस</span>.</p>
+      <div className="w-20 h-1 bg-[#a7f1a0] mx-auto m-2 rounded-full"></div>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         <TestimonialCard avatar="https://i.pravatar.cc/150?img=1" name="Elon Mosque" message="I save all my favorite recipes here, perfect for meal planning." />
         <TestimonialCard avatar="https://i.pravatar.cc/150?img=2" name="Tim Pen" message="Loved the Smart Search! Found my favorite dishes in seconds." />
@@ -87,6 +100,15 @@ const TestimonialCard = ({ avatar, name, message }) => {
         <h4 className='font-bold font-share text-gray-900'>{name}</h4>
       </div>
       <p className='text-gray-700 font-share'>{message}</p>
+    </div>
+  )
+}
+
+const StatCard = ( { number, label }) => {
+  return(
+    <div className='bg-white text-center rounded-2xl shadow-md p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2'>
+      <p className='text-4xl font-extrabold font-share text-gray-900 mb-2'>{number}</p>
+      <p className='text-gray-700 font-share'>{label}</p>
     </div>
   )
 }
