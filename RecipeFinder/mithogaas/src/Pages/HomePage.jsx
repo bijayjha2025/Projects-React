@@ -52,6 +52,19 @@ function HomePage(){
       </div>
     </div>
    </section>
+
+   <section className='py-10 bg-white'>
+    <div className='max-w-6xl mx-auto px-6 text-center'>
+      <h2 className='text-3xl font-extrabold font-share mb-3'>What Our Users Say</h2>
+      <p className='text-gray-600 max-w-2xl mx-auto mb-12 font-share'>Hear from people who love exploring recipes with मीठो गाँस.</p>
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <TestimonialCard avatar="https://i.pravatar.cc/150?img=1" name="Elon Mosque" message="I save all my favorite recipes here, perfect for meal planning." />
+        <TestimonialCard avatar="https://i.pravatar.cc/150?img=2" name="Tim Pen" message="Loved the Smart Search! Found my favorite dishes in seconds." />
+        <TestimonialCard avatar="https://i.pravatar.cc/150?img=3" name="Satya Mandela" message="The recipe details are so clear, cooking has never been easier." />
+      </div>
+    </div>
+   </section>
+
   </div>
   );
 };
@@ -64,6 +77,18 @@ const FeatureCard = ({ emoji, title, description }) => {
           <p className="text-gray-600 font-share leading-relaxed">{description}</p>
         </div>
     )
+}
+
+const TestimonialCard = ({ avatar, name, message }) => {
+  return(
+    <div className='bg-gray-50 p-6 rounded-2xl shadow-md text-left hover:shadow-xl transition-all duration-300 hover:-translate-y-2'>
+      <div className='flex items-center mb-4'>
+        <img src={avatar} alt={name} className='w-12 h-12 rounded-full mr-4' />
+        <h4 className='font-bold font-share text-gray-900'>{name}</h4>
+      </div>
+      <p className='text-gray-700 font-share'>{message}</p>
+    </div>
+  )
 }
 
 export default HomePage
