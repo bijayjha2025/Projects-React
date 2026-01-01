@@ -18,7 +18,7 @@ const Favorites = () => {
           </div>
        ) : (
         <>
-        <p className='text-center text-gray-600 font-share mb-8'>You have {favorites.length} saved {favorites.length === 1 ? 'recipe' : 'recipes'}</p>
+        <p className='text-center text-gray-600 font-share mb-8'>You have <span className='bg-[#58e633] font-extrabold'>{favorites.length}</span> saved {favorites.length === 1 ? 'recipe' : 'recipes'}</p>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {favorites.map(recipe => (
             <RecipeCard key={recipe.idMeal} recipe={recipe} />

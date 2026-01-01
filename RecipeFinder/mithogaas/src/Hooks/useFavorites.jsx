@@ -12,30 +12,27 @@ export const useFavorites= () => {
 }
 
 export const FavoritesProvider= ({ children }) => {
-    const [favorites, setFavorites] = useState([]);
-
-    useEffect(() => {
-        const savedFavorites = localStorage.getItem('favorites');
-        if (savedFavorites){
-            setFavorites(JSON.parse(savedFavorites));
+    const [favorites, setFavorites] = useState(() => {
+        try{
+            const saved = localStorage.getItem("favorites");
+            return saved ? JSON.parse(saved) : [];
+        }catch{
+            return [];
         }
-    }, []);
+    });
 
     useEffect(() => {
-        localStorage.setItem('favorites', JSON.stringify(favorites));
+        localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
 
     const addFavorite = (recipe) => {
-        setFavorites(prev=> {
-            if(prev.some(fav=> fav.idMeal === recipe.idMeal)){
-                return prev;
-            }
-            return[...prev, recipe];
-        })
+        setFavorites(prev=> 
+            prev.some(f=> f.idMeal === recipe.idMeal) ? prev : [...prev, recipe]
+        )
     };
 
-    const removeFavorite = (recipeId) => {
-        setFavorites(prev=> prev.filter(fav=> fav.idMeal !== recipeId));
+    const removeFavorite = (idMeal) => {
+        setFavorites(prev=> prev.filter(f=> f.idMeal !== idMeal));
     };
 
     const isFavorite = (recipeId) => {
@@ -43,12 +40,8 @@ export const FavoritesProvider= ({ children }) => {
     };
 
     const toggleFavorite = (recipe) => {
-        if(isFavorite(recipe.idMeal)){
-            removeFavorite(recipe.idMeal);
-        }else{
-            addFavorite(recipe);
+        isFavorite(recipe.idMeal) ? removeFavorite(recipe.idMeal) : addFavorite(recipe);
         }
-    };
 
     return(
         <FavoritesContext.Provider value={{
