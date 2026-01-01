@@ -9,6 +9,7 @@ const Recipes = () => {
     const[categories, setCategories] = useState([]);
     const[activeCategory, setActiveCategory] = useState('All');
     const[queryText, setQueryText] = useState('');
+    const[sortOption, setSortOption] = useState('default');
 
     useEffect(() => {
       const fetchCategories = async() =>{
@@ -49,6 +50,20 @@ const Recipes = () => {
           recipe => recipe.strCategory === activeCategory && recipe.strCategory !== 'Beef'
         );
 
+    const sortedRecipes = [...filteredRecipes].sort((a,b) => {
+      switch (sortOption) {
+        case 'a-z':
+          return a.strMeal.localeCompare(b.strMeal);
+
+        case 'z-a':
+          return b.strMeal.localeCompare(a.strMeal);
+        
+        case 'default':
+        default:
+          return 0;
+      }
+    });
+
     return(
      <div className='py-12 bg-gray-50 min-h-screen'>
       <div className='max-w-4xl mx-auto px-4 mb-12 text-center '>
@@ -84,14 +99,26 @@ const Recipes = () => {
           </div>
         )}
 
-        { !loading && filteredRecipes.length > 0 && (
+        { !loading && sortedRecipes.length > 0 && (
          <div className='max-w-6xl mx-auto px-4'>
-          <p className='text-center text-gray-600 font-share mb-8 text-lg'> Showing <span className='font-bold text-[#58e633]'>{filteredRecipes.length}</span>{''} recipes {activeCategory !== 'All' && (
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+          <p className='text-center sm:text-left text-gray-600 font-share text-lg'> Showing <span className='font-bold text-[#58e633]'>{sortedRecipes.length}</span>{''} recipes {activeCategory !== 'All' && (
             <>in <span className='font-semibold'>{activeCategory}</span></>
           )}</p>
 
+        <div className='flex items-center gap-3'>
+          <label htmlFor='sort' className='text-gray-700 font-share font-semibold text-sm'>Sort by:</label>
+          <select id='sort' value={sortOption} onChange={(e) => setSortOption(e.target.value)} className='px-4 py-2 bg-white border-2 border-gray-300 rounded-lg font-share font-semibold text-sm focus:outline-none focus:border-[#58e633] cursor-pointer hover:border-[#a7f1a0] transition-colors'>
+            <option value='default'>Default</option>
+            <option value='a-z'>A → Z</option>
+            <option value='z-a'>Z → A</option>
+          </select>
+        </div>
+       </div>
+
+
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredRecipes.map(recipe => (
+            {sortedRecipes.map(recipe => (
               <RecipeCard key={recipe.idMeal} recipe={recipe} />
             ))}
           </div>
