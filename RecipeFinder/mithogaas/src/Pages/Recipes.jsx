@@ -1,14 +1,36 @@
 import SearchBar from '../Components/SearchBar.jsx';
 import RecipeCard from '../Components/RecipeCard.jsx';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 const Recipes = () => {
     const[recipes, setRecipes] = useState([]);
     const[loading, setLoading] = useState(false);
     const[searched, setSearched] = useState(false);
+    const[categories, setCategories] = useState([]);
+    const[activeCategory, setActiveCategory] = useState('All');
+    const[queryText, setQueryText] = useState('');
+
+    useEffect(() => {
+      const fetchCategories = async() =>{
+        try{
+          const res = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
+          const data = await res.json();
+          setCategories(data.categories || []);
+
+        }catch(error){
+          console.log('Failed to load categories', error);
+        }
+      };
+      fetchCategories();
+    }, []);
 
     const handleSearch = useCallback(async (query) => {
+
+        if(!query.trim()) return;
+        setQueryText(query);
         setLoading(true);
+        setSearched(true);
+        setActiveCategory('All');
         try{
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
             const data = await response.json();
@@ -19,6 +41,13 @@ const Recipes = () => {
             setLoading(false);
         }
     }, []);
+
+    const filteredRecipes =
+    activeCategory === 'All'
+      ? recipes.filter(recipe => recipe.strCategory !== 'Beef')
+      : recipes.filter(
+          recipe => recipe.strCategory === activeCategory && recipe.strCategory !== 'Beef'
+        );
 
     return(
      <div className='py-12 bg-gray-50 min-h-screen'>
@@ -36,24 +65,40 @@ const Recipes = () => {
         </div>
        </div>
 
+      {recipes.length > 0 && (
+       <div className="max-w-6xl mx-auto px-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-3">
+          <button onClick={() => setActiveCategory('All')} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${activeCategory === 'All' ? 'bg-[#58e633] text-black' : 'bg-white text-gray-700 hover:bg-[#a7f1a0]'}`}>All</button>
+
+          {categories.filter(cat => cat.strCategory !== 'Beef').map(cat=> (
+            <button key={cat.idCategory} onClick={() => setActiveCategory(cat.strCategory)} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${activeCategory === cat.strCategory ? 'bg-[#58e633] text-black' : 'bg-white text-gray-700 hover:bg-[#a7f1a0]'}`}>{cat.strCategory}</button>
+            ))}
+          </div>
+        </div>
+      )}
+
        { loading && (
          <div className='flex flex-col items-center justify-center py-16'>
           <div className='animate-spin rounded-full h-16 w-16 border-b-4 border-[#58e633] mb-4'></div>
-            <p className='text-xl font-share text-gray-700'>Searching for delicious recipes...</p>
+            <p className='text-xl font-share text-gray-700'>Searching recipes...</p>
           </div>
         )}
 
-        { !loading && recipes.length > 0 && (
+        { !loading && filteredRecipes.length > 0 && (
          <div className='max-w-6xl mx-auto px-4'>
-          <p className='text-center text-gray-600 font-share mb-8 text-lg'> Found <span className='font-bold text-[#58e633]'>{recipes.length}</span> delicious {recipes.length === 1 ? 'recipe' : 'recipes'}</p>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {recipes.map(recipe => (
-            <RecipeCard key={recipe.idMeal} recipe={recipe} /> ))}
-          </div>
-         </div>
-        )}
+          <p className='text-center text-gray-600 font-share mb-8 text-lg'> Showing <span className='font-bold text-[#58e633]'>{filteredRecipes.length}</span>{''} recipes {activeCategory !== 'All' && (
+            <>in <span className='font-semibold'>{activeCategory}</span></>
+          )}</p>
 
-        { !loading && searched && recipes.length === 0 && (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredRecipes.map(recipe => (
+              <RecipeCard key={recipe.idMeal} recipe={recipe} />
+            ))}
+          </div>
+        </div>
+      )}
+
+        { !loading && searched && filteredRecipes.length === 0 && (
          <div className='max-w-2xl mx-auto px-4 text-center py-16'>
           <div className='text-6xl mb-6'>🔍</div>
            <h2 className='text-3xl font-bold text-gray-800 mb-4 font-share'>No Recipes Found</h2>
@@ -83,29 +128,11 @@ const Recipes = () => {
             )}
 
         {!loading && !searched && (
-         <div className='max-w-4xl mx-auto px-4 text-center py-12'>
+         <div className='max-w-3xl mx-auto px-4 text-center py-16'>
           <div className='text-7xl mb-6'>👨‍🍳</div>
-            <h2 className='text-2xl font-bold text-gray-800 mb-4 font-share'>Ready to Cook Something Amazing?</h2>
+            <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>Ready to Cook Something Amazing?</h2>
             <p className='text-lg text-gray-600 font-share mb-8'>Start by typing a recipe name, ingredient, or cuisine in the search bar above</p>
-                    
-            <div className='grid md:grid-cols-3 gap-6 mt-12'>
-             <div className='bg-white p-6 rounded-lg shadow-md'>
-              <div className='text-4xl mb-3'>🌍</div>
-                <h3 className='font-bold text-lg mb-2 font-share'>Global Cuisine</h3>
-                <p className='text-gray-600 text-sm font-share'>Explore recipes from around the world</p>
-              </div>
-              <div className='bg-white p-6 rounded-lg shadow-md'>
-               <div className='text-4xl mb-3'>📝</div>
-                <h3 className='font-bold text-lg mb-2 font-share'>Detailed Steps</h3>
-                <p className='text-gray-600 text-sm font-share'>Easy-to-follow instructions for every recipe</p>
-               </div>
-              <div className='bg-white p-6 rounded-lg shadow-md'>
-                <div className='text-4xl mb-3'>❤️</div>
-                <h3 className='font-bold text-lg mb-2 font-share'>Save Favorites</h3>
-                <p className='text-gray-600 text-sm font-share'>Bookmark recipes you love for later</p>
-                </div>
-               </div>
-             </div>
+          </div>
             )}
         </div>
     );

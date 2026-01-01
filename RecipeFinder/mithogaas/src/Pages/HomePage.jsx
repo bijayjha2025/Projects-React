@@ -49,6 +49,7 @@ function HomePage(){
        <FeatureCard emoji="🌍" title="Global Cuisines" description="Enjoy traditional recipes from around the world."/>
        <FeatureCard emoji="🌙" title="Dark Mode" description="Switch between light and dark themes for comfortable browsing."/>
        <FeatureCard emoji="📱" title="Responsive Design" description="Optimized for desktop, tablet, and mobile devices."/>
+       <FeatureCard emoji="🔗" title="View Source" description="Visit the original recipe source directly, when available."/>
       </div>
     </div>
    </section>
