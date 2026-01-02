@@ -8,12 +8,15 @@ import Footer from "./Components/Footer.jsx";
 import Recipes from "./Pages/Recipes.jsx";
 import { useTheme } from "./Hooks/useTheme.jsx";
 import { FavoritesProvider } from "./Hooks/useFavorites.jsx";
+import { MealPlannerProvider } from "./Hooks/useMealPlanner.jsx";
+import MealPlanner from "./Pages/MealPlanner.jsx";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <FavoritesProvider>
+      <MealPlannerProvider>
      <Router>
       <div className="min-h-screen flex flex-col">
         <NavBar theme={theme} toggleTheme={toggleTheme}/>
@@ -24,12 +27,14 @@ function App() {
             <Route path="/recipes" element = {<Recipes /> } />
             <Route path="/recipe/:id" element={<RecipeDetail />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/mealplanner" element={<MealPlanner />} />
           </Routes>
         </main>
 
         <Footer />
       </div>
      </Router>
+     </MealPlannerProvider>
     </FavoritesProvider>
   )
 }

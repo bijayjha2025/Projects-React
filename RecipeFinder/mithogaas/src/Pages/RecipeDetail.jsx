@@ -1,13 +1,17 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { useFavorites } from "../Hooks/useFavorites.jsx";
+import { useMealPlanner } from "../Hooks/useMealPlanner.jsx";
 
 const RecipeDetail = () => {
     const {id} = useParams();
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [showDaySelector, setShowDaySelector] = useState(false);
+    
     const {toggleFavorite, isFavorite} = useFavorites();
+    const { addRecipeToDay, isRecipeInPlan } = useMealPlanner();
+    
 
     useEffect(() => {
         const fetchRecipeDetail = async() => {
@@ -51,6 +55,11 @@ const RecipeDetail = () => {
               <Link to="/recipes" className="px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded hover:bg-[#58e633] transition-colors font-share">Back to Recipes</Link>
             </div>
         );}
+
+        const handleAddToMealPlan = (day) => {
+          addRecipeToDay(day, recipe);
+          setShowDaySelector(false);
+        };
 
         const isRecipeFavorite = isFavorite(recipe.idMeal);
     return(
@@ -97,7 +106,8 @@ const RecipeDetail = () => {
                   </div>
                  </div> )}
 
-                <div className="flex gap-4 mt-8">
+                <div className="flex flex-col gap-4 mt-8">
+                 <div className="flex gap-4">
                  <button onClick={() => {
                   console.log('Button clicked!', recipe);
                   toggleFavorite(recipe);}}
@@ -110,10 +120,23 @@ const RecipeDetail = () => {
                  {recipe.strSource && (
                   <a href={recipe.strSource} target="_blank" rel="noopener noreferrer" className="flex-1 px-6 py-3 bg-gray-200 text-gray-900 font-semibold rounded hover:bg-gray-300 transition-colors text-center font-share">View Source</a>
                   )}
+                  </div>
+
+                  <button onClick={()=> setShowDaySelector(!showDaySelector)} className="w-full px-6 py-3 bg-[#9fcefb] text-black font-semibold rounded hover:bg-[#7bb8e8] transition-colors font-share flex items-center justify-center gap-2">
+                  <span>📅</span>
+                  {isRecipeInPlan(recipe.idMeal) ? 'Added to Meal Plan' : 'Add to Meal Plan'}
+                  </button>
+
+                  {showDaySelector && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-4 bg-gray-50 rounded-lg">
+                    {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
+                    <button key={day} onClick={() => handleAddToMealPlan(day)} className="px-4 py-2 bg-white border-2 border-gray-300 rounded-lg hover:border-[#58e633] hover:bg-[#a7f1a0] transition-colors font-share font-semibold text-sm">{day}</button> ))}
+                  </div>
+                )}
+                 </div>
                 </div>
               </div>
             </div>
-        </div>
     );
 }
 
