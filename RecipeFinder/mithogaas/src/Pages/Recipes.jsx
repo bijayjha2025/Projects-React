@@ -1,6 +1,7 @@
 import SearchBar from '../Components/SearchBar.jsx';
 import RecipeCard from '../Components/RecipeCard.jsx';
 import { useState, useCallback, useEffect } from 'react';
+import { RecipeGridSkeleton, CategoryButtonsSkeleton } from '../Components/Skeletons.jsx';
 
 const Recipes = () => {
     const[recipes, setRecipes] = useState([]);
@@ -10,6 +11,7 @@ const Recipes = () => {
     const[activeCategory, setActiveCategory] = useState('All');
     const[queryText, setQueryText] = useState('');
     const[sortOption, setSortOption] = useState('default');
+    const[categoriesLoading, setCategoriesLoading] = useState(true);
 
     useEffect(() => {
       const fetchCategories = async() =>{
@@ -20,6 +22,8 @@ const Recipes = () => {
 
         }catch(error){
           console.log('Failed to load categories', error);
+        }finally {
+          setCategoriesLoading(false);
         }
       };
       fetchCategories();
@@ -82,6 +86,9 @@ const Recipes = () => {
 
       {recipes.length > 0 && (
        <div className="max-w-6xl mx-auto px-4 mb-8">
+        {categoriesLoading ? (
+          <CategoryButtonsSkeleton count={10} />
+        ) : (
         <div className="flex flex-wrap justify-center gap-3">
           <button onClick={() => setActiveCategory('All')} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${activeCategory === 'All' ? 'bg-[#58e633] text-black' : 'bg-white text-gray-700 hover:bg-[#a7f1a0]'}`}>All</button>
 
@@ -89,14 +96,14 @@ const Recipes = () => {
             <button key={cat.idCategory} onClick={() => setActiveCategory(cat.strCategory)} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${activeCategory === cat.strCategory ? 'bg-[#58e633] text-black' : 'bg-white text-gray-700 hover:bg-[#a7f1a0]'}`}>{cat.strCategory}</button>
             ))}
           </div>
+        )}
         </div>
       )}
 
        { loading && (
-         <div className='flex flex-col items-center justify-center py-16'>
-          <div className='animate-spin rounded-full h-16 w-16 border-b-4 border-[#58e633] mb-4'></div>
-            <p className='text-xl font-share text-gray-700'>Searching recipes...</p>
-          </div>
+         <div className='max-w-6xl mx-auto px-4'>
+          <RecipeGridSkeleton count={6} />
+         </div>
         )}
 
         { !loading && sortedRecipes.length > 0 && (

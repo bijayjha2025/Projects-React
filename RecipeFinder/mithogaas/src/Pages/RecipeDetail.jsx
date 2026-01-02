@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { useFavorites } from "../Hooks/useFavorites.jsx";
 import { useMealPlanner } from "../Hooks/useMealPlanner.jsx";
+import { RecipeDetailSkeleton } from "../Components/Skeletons.jsx";
 
 const RecipeDetail = () => {
     const {id} = useParams();
@@ -43,10 +44,8 @@ const RecipeDetail = () => {
         }
 
         if(loading) {
-            return(
-             <div className="flex items-center justify-center min-h-screen">
-              <p className="text-2xl font-share text-gray-700">Loading recipe...</p> </div>
-            )}
+        return <RecipeDetailSkeleton />
+        }
 
         if (!recipe) {
             return (

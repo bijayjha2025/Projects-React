@@ -2,9 +2,30 @@
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../Hooks/useFavorites.jsx';
 import RecipeCard from '../Components/RecipeCard.jsx';
+import { useState, useEffect } from 'react';
+import { RecipeGridSkeleton } from '../Components/Skeletons.jsx';
 
 const Favorites = () => {
     const { favorites } = useFavorites();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if(loading) {
+        return (
+            <div className='py-8 bg-gray-50 min-h-screen'>
+                <div className='max-w-6xl mx-auto px-4'>
+                    <div className='h-10 w-64 bg-gray-200 animate-pulse rounded mx-auto mb-8'></div>
+                    <RecipeGridSkeleton count={6} />
+                </div>
+            </div>
+        );
+    }
 
     return(
      <div className='py-8 bg-gray-50 min-h-screen'>
