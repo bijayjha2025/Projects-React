@@ -16,17 +16,6 @@
 }
 }
 
-@layer base {
-  html.dark body {
-    background-color: #030712;
-    color: #f9fafb;
-  }
-
-  html.dark nav {
-    background-color: #111827;
-  }
-
-  html.dark footer {
-    background-color: #14532d;
-  }
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }

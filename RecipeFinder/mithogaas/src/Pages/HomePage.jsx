@@ -24,7 +24,7 @@ function HomePage(){
      <div className='flex flex-col md:flex-row items-center justify-center gap-10'>
         <div className="md:w-1/2 text-center md:text-left">
         <p className="text-center text-gray-600 max-w-3xl mx-auto font-share">
-        <span className='font-extrabold bg-[#a7f1a0]'>मीठो गाँस</span> is your joyful companion for exploring a world of delicious possibilities! Powered by a vast global API, our app is designed for students, home cooks, and food enthusiasts who believe every meal should be a celebration. Whether you're craving a taste of home or a new international adventure, we help you quickly find in-depth recipes, watch helpful videos, and save your favorite recipes to enjoy again and again. With a beautiful responsive design and a cozy Dark Mode, we make finding your next favorite dish as happy and easy as the first bite!</p>
+        <span className='font-extrabold bg-[#a7f1a0]'>मीठो गाँस</span> is your joyful companion for exploring a world of delicious possibilities! Powered by a vast global API, our app is designed for students, home cooks, and food enthusiasts who believe every meal should be a celebration. Whether you're craving a taste of home or a new international adventure, we help you quickly find in-depth recipes, watch helpful videos, and save your favorite recipes to enjoy again and again. With a beautiful responsive design and being simple to use, we make finding your next favorite dish as happy and easy as the first bite!</p>
         </div>
 
         <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center bg-white shadow-md transition-transform transition-shadow duration-300 hover:scale-105 hover:shadow-xl hover:ring-4 hover:ring-[#a7f1a0]/40
@@ -47,7 +47,7 @@ function HomePage(){
        <FeatureCard emoji="❤️" title="Favorites" description="Save your favorite recipes and access them anytime."/>
        <FeatureCard emoji="🎥" title="Video Guides" description="Watch step-by-step video tutorial to master your favorite dishes."/>
        <FeatureCard emoji="🌍" title="Global Cuisines" description="Enjoy traditional recipes from around the world."/>
-       <FeatureCard emoji="🌙" title="Dark Mode" description="Switch between light and dark themes for comfortable browsing."/>
+       <FeatureCard emoji="📋" title="Plan & Shop" description="Weekly meal planning with automatic shopping list generation." />
        <FeatureCard emoji="📱" title="Responsive Design" description="Optimized for desktop, tablet, and mobile devices."/>
        <FeatureCard emoji="🔗" title="View Source" description="Visit the original recipe source directly, when available."/>
       </div>
