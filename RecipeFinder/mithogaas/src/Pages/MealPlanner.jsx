@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 import { useMealPlanner } from "../Hooks/useMealPlanner";
@@ -17,19 +16,19 @@ const MealPlanner = () => {
     return(
      <div className="py-12 bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
-        <div className='text-center mb-8 animate-fade-in-up'>
-         <h1 className='text-4xl md:text-5xl font-bold mb-4 font-share text-gray-900'>Your Weekly <span className='bg-[#a7f1a0] px-2 animate-highlight'>Meal Plan</span></h1>
-         <p className='text-lg text-gray-600 font-share mb-6'>Plan your meals for the week and generate a shopping list</p>
+       <div className='text-center mb-8 animate-fade-in-up'>
+        <h1 className='text-4xl md:text-5xl font-bold mb-4 font-share text-gray-900'>Your Weekly <span className='bg-[#a7f1a0] px-2 animate-highlight inline-block'>Meal Plan</span></h1>
+        <p className='text-lg text-gray-600 font-share mb-6'>Plan your meals for the week and generate a shopping list</p>
 
-         <div className='flex flex-wrap justify-center gap-4 mb-6 animate-fade-in-up animation-delay-100'>
-          <div className='bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all hover:-translate-y-1'>
-           <p className='text-sm text-gray-600 font-share'>Total Meals Planned</p>
-           <p className='text-3xl font-bold text-[#58e633] font-share'>{getTotalMeals()}</p>
-          </div>
+        <div className='flex flex-wrap justify-center gap-4 mb-6 animate-fade-in-up animation-delay-100'>
+         <div className='bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all hover:-translate-y-1'>
+          <p className='text-sm text-gray-600 font-share'>Total Meals Planned</p>
+          <p className='text-3xl font-bold text-[#58e633] font-share'>{getTotalMeals()}</p>
+         </div>
 
-          <div className='bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all hover:-translate-y-1'>
-           <p className='text-sm text-gray-600 font-share'>Days Planned</p>
-           <p className='text-3xl font-bold text-[#a7f1a0] font-share'>{daysWithMeals}/7</p>
+         <div className='bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all hover:-translate-y-1'>
+          <p className='text-sm text-gray-600 font-share'>Days Planned</p>
+          <p className='text-3xl font-bold text-[#a7f1a0] font-share'>{daysWithMeals}/7</p>
           </div>
 
           <div className='flex flex-wrap justify-center gap-4 mb-6 animate-fade-in-up animation-delay-200'>
@@ -38,8 +37,8 @@ const MealPlanner = () => {
 
            {getTotalMeals() > 0 && (
             <>
-           <button onClick={() => setShowShoppingList(!showShoppingList)} className='px-6 py-3 bg-[#9fcefb] text-blue-700 font-semibold rounded-lg hover:bg-[#7bb8e8] hover:scale-105 transition-all shadow-md font-share flex items-center gap-2'>
-           <span>🛒</span> {showShoppingList ? 'Hide' : 'View'} Shopping List</button>
+            <button onClick={() => setShowShoppingList(!showShoppingList)} className='px-6 py-3 bg-[#9fcefb] text-blue-700 font-semibold rounded-lg hover:bg-[#7bb8e8] hover:scale-105 transition-all shadow-md font-share flex items-center gap-2'>
+            <span>🛒</span> {showShoppingList ? 'Hide' : 'View'} Shopping List</button>
 
             <button onClick={() => setShowClearConfirm(true)} className='px-6 py-3 bg-red-100 text-red-700 font-semibold rounded-lg hover:bg-red-200 hover:scale-105 transition-all shadow-md font-share'>Clear Week</button>
             </>
@@ -52,17 +51,17 @@ const MealPlanner = () => {
 
          {getTotalMeals() === 0 ? (
           <div className='text-center py-16 bg-white rounded-2xl shadow-md animate-fade-in-up animation-delay-200'>
-            <div className='text-7xl mb-6 animate-float'>📅</div>
-             <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>Your Meal Plan is Empty</h2>
-             <p className='text-gray-600 font-share mb-6'>Start planning your week by adding recipes to each day!</p>
-             <Link to="/recipes" className='inline-block px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all shadow-md font-share'>Browse Recipes</Link>
-            </div>) :
+           <div className='text-7xl mb-6 animate-float'>📅</div>
+            <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>Your Meal Plan is Empty</h2>
+            <p className='text-gray-600 font-share mb-6'>Start planning your week by adding recipes to each day!</p>
+            <Link to="/recipes" className='inline-block px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all shadow-md font-share'>Browse Recipes</Link>
+           </div>) :
             (
-             <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-              {daysOfWeek.map((day, index) => (
-               <DayCard key={day} day={day} recipes={mealPlan[day]} onRemove={(recipeId) => removeRecipeFromDay(day, recipeId)}onClear={() => clearDay(day)} index={index}/>
-               ))}
-              </div> )}
+           <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+            {daysOfWeek.map((day, index) => (
+            <DayCard key={day} day={day} recipes={mealPlan[day]} onRemove={(recipeId) => removeRecipeFromDay(day, recipeId)}onClear={() => clearDay(day)} index={index}/>
+            ))}
+           </div> )}
 
           {showClearConfirm && (
           <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 animate-fade-in'>
@@ -80,7 +79,66 @@ const MealPlanner = () => {
            </div>
           </div>
         )}
+<style>{`
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
 
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+
+          @keyframes highlight {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+          }
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+
+          @keyframes scaleUp {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+          }
+
+          .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out both;
+          }
+
+          .animate-fade-in {
+            animation: fadeIn 0.5s ease-out both;
+          }
+
+          .animate-highlight {
+            animation: highlight 2s ease-in-out infinite;
+          }
+
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+          }
+
+          .animate-scale-up {
+            animation: scaleUp 0.3s ease-out both;
+          }
+
+          .animation-delay-100 {
+            animation-delay: 0.1s;
+          }
+
+          .animation-delay-200 {
+            animation-delay: 0.2s;
+          }
+
+          @media print {
+            .no-print {
+              display: none !important;
+            }
+          }
+        `}</style>
 
             </div>
         </div>
