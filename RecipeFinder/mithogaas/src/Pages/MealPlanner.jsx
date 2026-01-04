@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 import { useMealPlanner } from "../Hooks/useMealPlanner";
+import { usePrint } from "../Hooks/usePrint";
 
 const MealPlanner = () => {
     const { mealPlan, removeRecipeFromDay, clearDay, clearWeek, getTotalMeals } = useMealPlanner();
@@ -79,69 +80,72 @@ const MealPlanner = () => {
            </div>
           </div>
         )}
-<style>{`
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
 
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
+    <style>
+     {`
+     @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+      }
 
-          @keyframes highlight {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-          }
+     @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+     }
 
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-          }
+     @keyframes highlight {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+     }
 
-          @keyframes scaleUp {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-          }
+     @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+     }
 
-          .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out both;
-          }
+     @keyframes scaleUp {
+       from { opacity: 0; transform: scale(0.9); }
+       to { opacity: 1; transform: scale(1); }
+     }
 
-          .animate-fade-in {
-            animation: fadeIn 0.5s ease-out both;
-          }
+     .animate-fade-in-up {
+       animation: fadeInUp 0.6s ease-out both;
+      }
 
-          .animate-highlight {
-            animation: highlight 2s ease-in-out infinite;
-          }
+     .animate-fade-in {
+       animation: fadeIn 0.5s ease-out both;
+      }
 
-          .animate-float {
-            animation: float 3s ease-in-out infinite;
-          }
+     .animate-highlight {
+       animation: highlight 2s ease-in-out infinite;
+      }
 
-          .animate-scale-up {
-            animation: scaleUp 0.3s ease-out both;
-          }
+     .animate-float {
+       animation: float 3s ease-in-out infinite;
+      }
 
-          .animation-delay-100 {
-            animation-delay: 0.1s;
-          }
+      .animate-scale-up {
+        animation: scaleUp 0.3s ease-out both;
+      }
 
-          .animation-delay-200 {
-            animation-delay: 0.2s;
-          }
+      .animation-delay-100 {
+        animation-delay: 0.1s;
+      }
 
-          @media print {
-            .no-print {
-              display: none !important;
-            }
-          }
-        `}</style>
+     .animation-delay-200 {
+        animation-delay: 0.2s;
+      }
 
-            </div>
-        </div>
+      @media print {
+       .no-print {
+      display: none !important;
+      }
+     }
+    `}
+    </style>
+
+  </div>
+ </div>
     );
 }
 
@@ -183,8 +187,9 @@ const DayCard = ({ day, recipes, onRemove, onClear, index }) => {
 };
 
 const ShoppingList = ({ onClose }) => {
-  const { generateShoppingList } = useMealPlanner();
+  const { generateShoppingList, mealPlan } = useMealPlanner();
   const shoppingList = generateShoppingList();
+  const { handlePrint, handleExportCSV, copyToClipboard } = usePrint();
   const [checkedItems, setCheckedItems] = useState(new Set());
 
   const toggleItem = (index) => {
@@ -197,16 +202,25 @@ const ShoppingList = ({ onClose }) => {
     setCheckedItems(newChecked);
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handlePrintClick = () => {
+    handlePrint(shoppingList, mealPlan);
+  }
+    
+    const handleExportCSVClick = () => {
+    handleExportCSV(shoppingList);
   };
 
+  const handleCopyClick = async () => {
+    await copyToClipboard(shoppingList, checkedItems);
+    alert('Shopping list copied to clipboard!');
+  };
+    
   return(
    <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 no-print animate-fade-in' onClick={onClose}>
     <div className='bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col animate-scale-up' onClick={(e) => e.stopPropagation()}>
      <div className='bg-[#a7f1a0] px-6 py-4 flex justify-between items-center'>
       <h2 className='text-2xl font-bold font-share text-gray-900'>🛒 Shopping List</h2>
-      <button onClick={onClose} className='text-gray-700 hover:text-gray-900 hover:scale-125 transition-all text-2xl font-bold'>✕</button>
+      <button onClick={onClose} className='text-gray-700 hover:text-gray-900 hover:scale-125 transition-all text-2xl font-bold no-print'>✕</button>
      </div>
 
     <div className='p-6 overflow-y-auto flex-1'>
@@ -227,8 +241,10 @@ const ShoppingList = ({ onClose }) => {
       {shoppingList.sort((a, b) => a.name.localeCompare(b.name)).map((item, index) => (
       <div key={index} className={`flex items-start gap-3 p-3 rounded-lg transition-all cursor-pointer hover:shadow-md ${checkedItems.has(index) ? 'bg-green-50 border-2 border-green-200' : 'bg-gray-50 hover:bg-gray-100'
         }`} onClick={() => toggleItem(index)}>
+
+          <span className="hidden show-on-print w-4 h-4 border border-gray-400 mr-2"></span>
         
-       <input type='checkbox' checked={checkedItems.has(index)} onChange={() => toggleItem(index)} className='mt-1 w-4 h-4 cursor-pointer accent-[#58e633]' onClick={(e) => e.stopPropagation()} />
+       <input type='checkbox' checked={checkedItems.has(index)} onChange={() => toggleItem(index)} className='no-print mt-1 w-4 h-4 cursor-pointer accent-[#58e633]' onClick={(e) => e.stopPropagation()} />
 
        <div className='flex-1'>
         <p className={`font-semibold font-share ${
@@ -247,8 +263,10 @@ const ShoppingList = ({ onClose }) => {
 
     {shoppingList.length > 0 && (
      <div className='bg-gray-50 px-6 py-4 flex gap-3 no-print'>
-      <button onClick={handlePrint} className='flex-1 px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all font-share'>🖨️ Print List</button>
-      <button onClick={onClose} className='px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors font-share'>Close</button>
+      <button onClick={handlePrintClick} className='flex-1 px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all font-share text-center'>🖨️ Print</button>
+      <button onClick={handleExportCSVClick} className='flex-1 min-w-[120px] px-6 py-3 bg-blue-100 text-blue-700 font-semibold rounded-lg hover:bg-blue-200 hover:scale-105 transition-all font-share text-center'>📊 Export CSV</button>
+      <button onClick={handleCopyClick} className='flex-1 min-w-[120px] px-6 py-3 text-center bg-amber-200 font-semibold rounded-lg hover:bg-amber-500 hover:scale-105 transition-all font-share'>📋 Copy</button>
+      <button onClick={onClose} className='flex-1 min-w-[120px] px-6 py-3 bg-gray-200 text-gray-700 text-center font-semibold rounded-lg hover:bg-gray-300 transition-colors font-share'>Close</button>
      </div>
     )}
    </div>
