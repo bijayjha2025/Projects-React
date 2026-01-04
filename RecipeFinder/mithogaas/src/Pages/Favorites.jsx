@@ -156,6 +156,56 @@ const Favorites = () => {
               </div>
             </div>
             </div> )}
+
+            <style>{`
+             @keyframes fadeInUp {
+              from { opacity: 0; transform: translateY(20px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+
+            @keyframes highlight {
+             0%, 100% { transform: scale(1); }
+             50% { transform: scale(1.05); }
+            }
+
+            @keyframes float {
+             0%, 100% { transform: translateY(0px); }
+             50% { transform: translateY(-10px); }
+            }
+
+            @keyframes scaleUp {
+             from { opacity: 0; transform: scale(0.9); }
+             to { opacity: 1; transform: scale(1); }
+            }
+
+            .animate-fade-in-up {
+              animation: fadeInUp 0.6s ease-out both; }
+
+            .animate-fade-in {
+              animation: fadeIn 0.5s ease-out both; }
+
+            .animate-highlight {
+              animation: highlight 2s ease-in-out infinite; }
+
+            .animate-float {
+              animation: float 3s ease-in-out infinite;  }
+
+            .animate-scale-up {
+              animation: scaleUp 0.3s ease-out both;  }
+
+            .animation-delay-100 {
+              animation-delay: 0.1s; }
+
+            .animation-delay-200 {
+              animation-delay: 0.2s; }
+            `}
+            </style>
+
         </div>
         </div>
     );
