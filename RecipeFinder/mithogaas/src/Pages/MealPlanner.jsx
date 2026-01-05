@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 import { useMealPlanner } from "../Hooks/useMealPlanner";
 import { usePrint } from "../Hooks/usePrint";
+import backgroundImage from '../assets/Images/Mixed.jpg'
 
 const MealPlanner = () => {
     const { mealPlan, removeRecipeFromDay, clearDay, clearWeek, getTotalMeals } = useMealPlanner();
@@ -51,8 +52,11 @@ const MealPlanner = () => {
         {showShoppingList && <ShoppingList onClose={() => setShowShoppingList(false)} />}
 
          {getTotalMeals() === 0 ? (
-          <div className='text-center py-16 bg-white rounded-2xl shadow-md animate-fade-in-up animation-delay-200'>
-           <div className='text-7xl mb-6 animate-float'>📅</div>
+          <div className='max-w-3xl text-center py-16 mx-auto px-4'>
+           <div className='mb-8 rounded-2xl overflow-hidden shadow-2xl animate-fadeSlideUp'>
+             <img src= {backgroundImage} alt='mixedimage' className='w-full h-80 object-cover' />
+           </div>
+
             <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>Your Meal Plan is Empty</h2>
             <p className='text-gray-600 font-share mb-6'>Start planning your week by adding recipes to each day!</p>
             <Link to="/recipes" className='inline-block px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all shadow-md font-share'>Browse Recipes</Link>
@@ -134,6 +138,15 @@ const MealPlanner = () => {
 
      .animation-delay-200 {
         animation-delay: 0.2s;
+      }
+      
+      @keyframes fadeSlideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-fadeSlideUp {
+        animation: fadeSlideUp 0.8s ease-out;
       }
 
       @media print {

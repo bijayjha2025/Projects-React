@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useFavorites } from '../Hooks/useFavorites.jsx';
 import RecipeCard from '../Components/RecipeCard.jsx';
 import { useState, useMemo } from 'react';
+import backgroundImage from '../assets/Images/ImageForFavorite.jpg'
 
 const Favorites = () => {
     const { favorites } = useFavorites();
@@ -70,12 +71,15 @@ const Favorites = () => {
          </p>
         </div>
 
-        { favorites.length === 0 ? (
-          <div className='text-center py-16 animate-fade-in-up animation-delay-200'>
-           <div className='text-7xl mb-6 animate-float'>❤️</div>
-            <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>No Favorites Yet</h2>
-            <p className='text-lg text-gray-600 font-share mb-8 max-w-md mx-auto'>Start exploring recipes and click the heart icon to save your favorites here!</p>
-            <Link to="/recipes" className='inline-block px-8 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all shadow-md font-share'>🔍 Explore Recipes</Link>
+        { favorites.length === 0 ? (         
+          <div className='max-w-3xl mx-auto px-4 text-center py-16'>
+           <div className='mb-8 rounded-2xl overflow-hidden shadow-2xl animate-fadeSlideUp'>
+            <img src= {backgroundImage} alt='meals and foods' className='w-full h-80 object-cover' />
+           </div>
+
+           <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>No Favorites Yet</h2>
+           <p className='text-lg text-gray-600 font-share mb-8 max-w-md mx-auto'>Start exploring recipes and click the heart icon to save your favorites here!</p>
+           <Link to="/recipes" className='inline-block px-8 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all shadow-md font-share'>🔍 Explore Recipes</Link>
            </div> )
            : (
             <>
@@ -203,6 +207,16 @@ const Favorites = () => {
 
             .animation-delay-200 {
               animation-delay: 0.2s; }
+            
+            @keyframes fadeSlideUp {
+              from { opacity: 0; transform: translateY(30px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+
+            .animate-fadeSlideUp {
+              animation: fadeSlideUp 0.8s ease-out;
+            }
+
             `}
             </style>
 

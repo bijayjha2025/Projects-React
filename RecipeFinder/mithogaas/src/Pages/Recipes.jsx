@@ -2,6 +2,7 @@ import SearchBar from '../Components/SearchBar.jsx';
 import RecipeCard from '../Components/RecipeCard.jsx';
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { RecipeGridSkeleton, CategoryButtonsSkeleton } from '../Components/Skeletons.jsx';
+import backgroundImage from '../assets/Images/ImageForRecipe.jpg';
 
 const Recipes = () => {
     const[recipes, setRecipes] = useState([]);
@@ -201,8 +202,11 @@ const Recipes = () => {
             )}
 
         {!loading && !searched && (
-         <div className='max-w-3xl mx-auto px-4 text-center py-16 animate-fade-in-up'>
-          <div className='text-7xl mb-6 animate-float'>👨‍🍳</div>
+         <div className='max-w-3xl mx-auto px-4 text-center py-16'>
+          <div className='mb-8 rounded-2xl overflow-hidden shadow-2xl animate-fadeSlideUp'>
+            <img src= {backgroundImage} alt='unprepared meals' className='w-full h-80 object-cover' />
+          </div>
+
             <h2 className='text-2xl font-bold text-gray-800 mb-3 font-share'>Ready to Cook Something Amazing?</h2>
             <p className='text-lg text-gray-600 font-share mb-8'>Start by typing a recipe name, ingredient, or cuisine in the search bar above</p>
           </div>
@@ -254,6 +258,15 @@ const Recipes = () => {
 
           .animation-delay-300 {
             animation-delay: 0.3s;
+          }
+          
+          @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+          }
+
+          .animate-fadeSlideUp {
+            animation: fadeSlideUp 0.8s ease-out;
           }
         `}</style>
 

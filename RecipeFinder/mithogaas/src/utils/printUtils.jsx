@@ -200,7 +200,6 @@ export const generatePrintContent = (shoppingList, mealPlan) => {
         
         <div style="margin-top: 20px; font-size: 10px; color: #cbd5e0;">
           Document ID: ${documentId} • ${new Date().toISOString().split('T')[0]} 
-          • Page 1 of 1
         </div>
       </div>
       
