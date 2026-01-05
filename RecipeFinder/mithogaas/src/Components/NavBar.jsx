@@ -1,9 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { useComparison } from '../Hooks/useComparison';
 
 const NavBar = () => {
  const [isOpen, setIsOpen] = useState(false);
  const location = useLocation();
+ const { getComparisonCount } = useComparison();
  const isActive = (path) => location.pathname === path;
 
  const linkClasses = (path) => {
@@ -38,6 +40,7 @@ const NavBar = () => {
          <Link to="/recipes" className={linkClasses('/recipes')}>Recipes</Link>
          <Link to="/favorites" className={linkClasses('/favorites')}>Favorites</Link>
          <Link to="/mealplanner" className={linkClasses('/mealplanner')}>Meal Planner</Link>
+         <Link to="/compare" className={linkClasses('/compare')}>Compare</Link>
         </div>
 
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 rounded-lg hover:bg-green-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-green-300 border-none bg-transparent cursor-pointer" aria-label="Toggle menu" aria-expanded={isOpen}>
@@ -55,6 +58,7 @@ const NavBar = () => {
             <Link to="/recipes" className={mobileLinkClasses('/recipes')}>📖 Recipes</Link>
             <Link to="/favorites" className={mobileLinkClasses('/favorites')}>❤️ Favorites </Link>
             <Link to="/mealplanner" className={mobileLinkClasses('/mealplanner')}>📋 Meal Planner</Link>
+            <Link to="/compare" className={mobileLinkClasses('/compare')}>⚖️ Compare</Link>
            </div>
           </div>
          </div>

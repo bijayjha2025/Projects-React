@@ -9,12 +9,15 @@ import Recipes from "./Pages/Recipes.jsx";
 import { FavoritesProvider } from "./Hooks/useFavorites.jsx";
 import { MealPlannerProvider } from "./Hooks/useMealPlanner.jsx";
 import MealPlanner from "./Pages/MealPlanner.jsx";
+import { ComparisonProvider } from "./Hooks/useComparison.jsx";
+import RecipeComparison  from "./Pages/RecipeComparison.jsx";
 
 function App() {
 
   return (
     <FavoritesProvider>
       <MealPlannerProvider>
+        <ComparisonProvider>
      <Router>
       <div className="min-h-screen flex flex-col">
         <NavBar />
@@ -26,12 +29,14 @@ function App() {
             <Route path="/recipe/:id" element={<RecipeDetail />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/mealplanner" element={<MealPlanner />} />
+            <Route path="/compare" element={<RecipeComparison />} />
           </Routes>
         </main>
 
         <Footer />
       </div>
      </Router>
+     </ComparisonProvider>
      </MealPlannerProvider>
     </FavoritesProvider>
   )
