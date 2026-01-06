@@ -1,12 +1,17 @@
 import { useComparison } from "../Hooks/useComparison.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const RecipeComparison = () => {
   const { comparisonList, removeFromComparison, clearComparison } =
     useComparison();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+        setTimeout(() => setIsLoaded(true), 100);
+    }, []);
 
   if (comparisonList.length < 2) {
     return (
@@ -35,8 +40,7 @@ const RecipeComparison = () => {
   };
 
   const getStepCount = (recipe) => {
-    return recipe.strInstructions.split("\n").filter((step) => step.trim())
-      .length;
+    return recipe.strInstructions.split("\n").filter((step) => step.trim()).length;
   };
 
   const estimateCookingTime = (recipe) => {
@@ -90,17 +94,18 @@ const RecipeComparison = () => {
 
       <div className="max-w-7xl mx-auto px-4">
        {activeTab === "overview" && (
-         <div className="grid gap-6" style={{gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
-          {comparisonList.map((recipe) => {
+         <div className="grid gap-6 animate-fadeSlideUp" style={{gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
+          {comparisonList.map((recipe, index) => {
           const ingredients = getIngredients(recipe);
           const stepCount = getStepCount(recipe);
           const cookingTime = estimateCookingTime(recipe);
 
           return (
-           <div key={recipe.idMeal} className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="relative">
-             <img src={recipe.strMealThumb} alt={recipe.strMeal} className="w-full h-48 object-cover"/>
-             <button onClick={() => removeFromComparison(recipe.idMeal)} className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition-colors">✕</button>
+           <div key={recipe.idMeal} className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 ${ isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8' }`} style={{ transitionDelay: `${index * 150}ms` }} >
+
+            <div className="relative group">
+             <img src={recipe.strMealThumb} alt={recipe.strMeal} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"/>
+             <button onClick={() => removeFromComparison(recipe.idMeal)} className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition-all duration-300 hover:scale-110">✕</button>
             </div>
 
             <div className="p-6">
@@ -150,7 +155,7 @@ const RecipeComparison = () => {
         )}
 
         {activeTab === "ingredients" && (
-         <div>
+         <div className='animate-fadeSlideUp'>
           {commonIngredients.length > 0 && (
            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-bold mb-3 font-share text-green-800">🎯 Common Ingredients ({commonIngredients.length})</h3>
@@ -163,11 +168,11 @@ const RecipeComparison = () => {
             )}
 
            <div className="grid gap-6" style={{ gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
-            {comparisonList.map((recipe) => {
+            {comparisonList.map((recipe, index) => {
              const ingredients = getIngredients(recipe);
 
             return (
-             <div key={recipe.idMeal} className="bg-white rounded-lg shadow-md p-6">
+             <div key={recipe.idMeal} className={`bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-all duration-300 ${ isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8' }`} style={{ transitionDelay: `${(index + 1) * 150}ms` }}>
               <h4 className="font-bold text-lg mb-4 font-share">{recipe.strMeal}</h4>
               <ul className="space-y-2">
               {ingredients.map((ing, i) => {
@@ -185,13 +190,13 @@ const RecipeComparison = () => {
         )}
 
         {activeTab === "instructions" && (
-         <div className="grid gap-6" style={{ gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
-          {comparisonList.map((recipe) => {
+         <div className="grid gap-6 animate-fadeSlideUp" style={{ gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
+          {comparisonList.map((recipe, index) => {
            const steps = recipe.strInstructions
             .split("\n")
             .filter((step) => step.trim());
             return (
-             <div key={recipe.idMeal} className="bg-white rounded-lg shadow-md p-6">
+             <div key={recipe.idMeal} className={`bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-all duration-300 ${ isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8' }`} style={{ transitionDelay: `${index * 150}ms` }} >
               <h4 className="font-bold text-lg mb-4 font-share">{recipe.strMeal}</h4>
               <ol className="space-y-4">
                {steps.map((step, i) => (
