@@ -60,8 +60,63 @@ const RecipeNotesSection = ({ recipeId }) => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
+  const lastCooked = getLastCookedDate(recipeId);
+  const cookingCount = getCookingCount(recipeId);
+  const successRate = getSuccessRate(recipeId);
+
+  return(
+   <div>
+   <div>
+    <div>
+     <h2>My Recipe Notes</h2>
+     <p>Personalize this recipe with your own notes and modifications</p>
+    </div>
+
+    <div>
+     {cookingCount >0 && (
+      <div>
+       <p>{cookingCount}</p>
+       <p>Times Cooked</p>
+      </div>
+     )}
+     {successRate !== null && (
+       <div>
+        <p>{Math.round(successRate)}</p>
+        <p>Success Rate</p>
+      </div>
+     )}
+    </div>
+    </div>
+
+    <div>
+     <label>Your Rating</label>
+     <div>{[1, 2, 3, 4, 5].map(star => (
+      <button key={star} onClick={() => setRating(recipeId, star)}>{star <= recipeNotes.rating ? '⭐' : '☆'}</button> ))}
+      {recipeNotes.rating > 0 && (
+       <button onClick={() => setRating(recipeId, 0)}>Clear</button> )}
+     </div>
+    </div>
+
+    {lastCooked && (
+     <div>
+      <p>🍳 Last cooked: <span>{formatDate(lastCooked)}</span></p>
+     </div>
+    )}
+
+    <div>
+     <button onClick={() => setActiveTab('notes')} className={`px-4 py-2 ${activeTab === 'notes' ? '' : ''}`}>Notes ({ recipeNotes.notes?.length || 0 })</button>
+     <button onClick={() => setActiveTab('modifications')} className={`px-4 py-2 ${activeTab === 'modifications' ? '' : ''}`}>Substitutions ({recipeNotes.modifications?.length || 0 })</button>
+     <button onClick={() => setActiveTab('history')} className={`px-4 py-2 ${ activeTab === 'history' ? '' : ''}`}>Cooking Log ({recipeNotes.cookingHistory?.length || 0})</button>
+     <button onClick={() => setActiveTab('tips')} className={`px-4 py-2 ${ activeTab === 'tips' ? '' : '' }`}>My Tips ({recipeNotes.tips?.length || 0})</button>
+    </div>
+    
+    </div>
+
+  );
 
 
 
 
 }
+
+export default RecipeNotesSection;
