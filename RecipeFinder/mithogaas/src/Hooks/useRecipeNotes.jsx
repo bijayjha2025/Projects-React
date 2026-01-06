@@ -1,3 +1,4 @@
+
 import { useContext, useState, createContext, useEffect } from "react";
 
 const RecipeNotesContext = createContext();
@@ -109,4 +110,21 @@ export const RecipeNotesProvider = ({children}) => {
      setRecipeNotes(prev => ({ ...prev, [recipeId]: { ...prev[recipeId], tips: prev[recipeId].tips.filter(tip => tip.id !== tipId) }
     }));
     };
+
+    const hasCustomizations = (recipeId) => {
+     const notes = getRecipeNotes(recipeId);
+       return (
+        notes.notes?.length > 0 || notes.modifications?.length > 0 || notes.rating > 0 || notes.cookingHistory?.length > 0 || notes.tips?.length > 0 );
+    }
+
+    const clearRecipeNotes = (recipeId) => {
+     setRecipeNotes(prev => {
+      const updated = { ...prev };
+      delete updated[recipeId];
+      return updated;
+    })};
+
+    return(
+        <RecipeNotesContext.Provider value={{ getRecipeNotes, addNote, editNote, deleteNote, addModification, deleteModification, setRating, addCookingEntry, getLastCookedDate, getCookingCount, getSuccessRate, addTip, deleteTip, hasCustomizations, clearRecipeNotes }}>{children}</RecipeNotesContext.Provider>
+    );
 }
