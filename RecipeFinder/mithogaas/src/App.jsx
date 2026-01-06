@@ -11,6 +11,7 @@ import { MealPlannerProvider } from "./Hooks/useMealPlanner.jsx";
 import MealPlanner from "./Pages/MealPlanner.jsx";
 import { ComparisonProvider } from "./Hooks/useComparison.jsx";
 import RecipeComparison  from "./Pages/RecipeComparison.jsx";
+import { RecipeNotesProvider } from "./Hooks/useRecipeNotes.jsx";
 
 function App() {
 
@@ -18,8 +19,10 @@ function App() {
     <FavoritesProvider>
       <MealPlannerProvider>
         <ComparisonProvider>
-     <Router>
-      <div className="min-h-screen flex flex-col">
+          <RecipeNotesProvider>
+
+      <Router>
+       <div className="min-h-screen flex flex-col">
         <NavBar />
 
         <main className="flex-grow">
@@ -34,8 +37,10 @@ function App() {
         </main>
 
         <Footer />
-      </div>
+       </div>
      </Router>
+
+     </RecipeNotesProvider>
      </ComparisonProvider>
      </MealPlannerProvider>
     </FavoritesProvider>

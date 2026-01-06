@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { useFavorites } from "../Hooks/useFavorites.jsx";
 import { useMealPlanner } from "../Hooks/useMealPlanner.jsx";
 import { RecipeDetailSkeleton } from "../Components/Skeletons.jsx";
+import { useRecipeNotes } from "../Hooks/useRecipeNotes.jsx";
+import RecipeNotesSection from "../Components/RecipeNotesSection.jsx";
 
 const RecipeDetail = () => {
     const {id} = useParams();
@@ -12,6 +14,8 @@ const RecipeDetail = () => {
     
     const {toggleFavorite, isFavorite} = useFavorites();
     const { addRecipeToDay, isRecipeInPlan } = useMealPlanner();
+
+    const {hasCustomizations} = useRecipeNotes(); 
     
 
     useEffect(() => {
@@ -61,6 +65,8 @@ const RecipeDetail = () => {
         };
 
         const isRecipeFavorite = isFavorite(recipe.idMeal);
+        const hasNotes = hasCustomizations(recipe.idMeal);
+
     return(
         <div className="max-w-5xl mx-auto px-4 py-8">
           <Link to="/recipes" className="inline-flex items-center text-gray-700 hover:text-[#58e633] mb-6 font-share font-semibold">← Back to Recipes</Link>
@@ -135,6 +141,11 @@ const RecipeDetail = () => {
                  </div>
                 </div>
               </div>
+
+              <div className="max-w-5xl mx-auto px-4 mb-8">
+              <RecipeNotesSection recipeId={recipe.idMeal} />
+              </div>
+              
             </div>
     );
 }

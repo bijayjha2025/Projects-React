@@ -1,10 +1,14 @@
 
 import { Link } from 'react-router-dom';
 import { useComparison } from '../Hooks/useComparison';
+import { useRecipeNotes } from '../Hooks/useRecipeNotes.jsx';
 
 const RecipeCard = ({ recipe }) => {
     const { addToComparison, isInComparison, removeFromComparison } = useComparison();
     const inComparison = isInComparison(recipe.idMeal);
+
+    const {hasCustomizations} = useRecipeNotes();
+    const hasNotes = hasCustomizations(recipe.idMeal);
 
     const handleCompareClick = (e) => {
         e.preventDefault();
@@ -32,6 +36,12 @@ const RecipeCard = ({ recipe }) => {
           </svg> )}
          </button>
         </div>
+
+        {hasNotes && (
+          <div className='absolute top-38 left-2 z-10'>
+           <span className='px-3 py-1 bg-[#a7f1a0] rounded-full text-sm font-semibold shadow-lg flex items-center gap-1'>Notes</span>
+          </div>
+        )}
 
         <img src={recipe.strMealThumb} alt={recipe.strMeal} className='w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110' />
 
