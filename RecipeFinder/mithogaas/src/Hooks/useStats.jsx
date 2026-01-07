@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useFavorites } from "./useFavorites";
 import { useMealPlanner } from "./useMealPlanner";
 import { useRecipeNotes } from "./useRecipeNotes";
@@ -110,32 +109,15 @@ export const useStats = () => {
     const mostViewed = Object.entries(recipeViewCounts).map(([id, data]) => ({ recipeId: id, ...data })).sort((a, b) => b.count - a.count).slice(0, 5);
 
     return {
-            overview: {
-                totalViewed,
-                totalFavorites,
-                totalPlanned,
-                totalCustomized,
-                recentViews,
-                totalCookingSessions,
-                successRate: totalCookingSessions > 0 
-                    ? Math.round((successfulSessions / totalCookingSessions) * 100)
-                    : 0
-            },
-            categories: {
-                favorite: categoryBreakdown,
-                viewed: viewedCategories
-            },
-            cuisines: cuisineBreakdown,
-            activity: dailyActivity,
-            topRecipes: {
-                mostViewed,
-                topRated: topRatedRecipes.slice(0, 5)
-            }
-        };
+      overview: { totalViewed, totalFavorites, totalPlanned, totalCustomized, recentViews, totalCookingSessions, successRate: totalCookingSessions > 0 ? Math.round((successfulSessions / totalCookingSessions) * 100) : 0 },
+      
+      categories: { favorite: categoryBreakdown, viewed: viewedCategories },
+      
+      cuisines: cuisineBreakdown, activity: dailyActivity,
+      
+      topRecipes: { mostViewed, topRated: topRatedRecipes.slice(0, 5) }
+    };
     };
 
-  }
-
-
-
-}
+    return { calculateStats, trackRecipeView, getViewingHistory };
+};

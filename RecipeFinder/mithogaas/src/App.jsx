@@ -12,6 +12,7 @@ import MealPlanner from "./Pages/MealPlanner.jsx";
 import { ComparisonProvider } from "./Hooks/useComparison.jsx";
 import RecipeComparison  from "./Pages/RecipeComparison.jsx";
 import { RecipeNotesProvider } from "./Hooks/useRecipeNotes.jsx";
+import StatsDashboard from "./Pages/StatsDashboard.jsx";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/mealplanner" element={<MealPlanner />} />
             <Route path="/compare" element={<RecipeComparison />} />
+            <Route path="/stats" element={<StatsDashboard />} />
           </Routes>
         </main>
 

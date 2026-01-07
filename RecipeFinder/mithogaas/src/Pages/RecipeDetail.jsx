@@ -15,7 +15,8 @@ const RecipeDetail = () => {
     const {toggleFavorite, isFavorite} = useFavorites();
     const { addRecipeToDay, isRecipeInPlan } = useMealPlanner();
 
-    const {hasCustomizations} = useRecipeNotes(); 
+    const {hasCustomizations} = useRecipeNotes();
+    const {trackRecipeView} = useState();
     
 
     useEffect(() => {
@@ -24,7 +25,12 @@ const RecipeDetail = () => {
             try {
                 const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
                 const data = await response.json();
-                setRecipe(data.meals ? data.meals[0] : null);
+                const fetchedRecipe = data.meals ? data.meals[0] : null;
+                setRecipe(fetchedRecipe);
+
+                if (fetchedRecipe) {
+                  trackRecipeView(fetchedRecipe); }
+
             } catch (error) {
                 console.error('Error fetching recipe details:', error);
             } finally {
@@ -73,7 +79,12 @@ const RecipeDetail = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <img src={recipe.strMealThumb} alt={recipe.strMeal} className="w-full h-96 object-cover"/>
             <div className="p-8">
+              <div className="flex items-start justify-between mb-4">
               <h1 className="text-4xl font-bold mb-4 font-share">{recipe.strMeal}</h1>
+              {hasNotes && (
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 text-sm font-semibold rounded-full font-share flex items-center gap-1">📝 Customized</span>
+                )}
+              </div>
 
               <div className="flex flex-wrap gap-3 mb-6">
                <span className="px-4 py-2 bg-[#a7f1a0] text-black font-semibold rounded-full text-sm font-share">{recipe.strCategory}</span>
