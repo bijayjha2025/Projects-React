@@ -29,7 +29,7 @@ export const RecipeNotesProvider = ({children}) => {
         return recipeNotes[recipeId] || {
             notes: [],
             modifications: [],
-            rating: [],
+            rating: 0,
             cookingHistory: [],
             tips: []
         }
@@ -44,12 +44,12 @@ export const RecipeNotesProvider = ({children}) => {
 
     const editNote = (recipeId, noteId, newText) => {
      if(!newText.trim()) return;
-     setRecipeNotes(prev => ({ ...prev, [recipeId]: { ...prev[recipeId], notes: prev[recipeId].notes.map(note => note.id === noteId ? {...note, text: newText, edited: true, lastEditDate: new Date().toISOString()} : note )}
+     setRecipeNotes(prev => ({ ...prev, [recipeId]: { ...prev[recipeId], notes: (prev[recipeId]?.notes || []).map(note => note.id === noteId ? {...note, text: newText, edited: true, lastEditDate: new Date().toISOString()} : note )}
     }))
     }
 
     const deleteNote = (recipeId, noteId) => {
-     setRecipeNotes(prev => ({ ...prev, [recipeId]: { ...prev[recipeId], notes: prev[recipeId].notes.filter(note => note.id !== noteId )}
+     setRecipeNotes(prev => ({ ...prev, [recipeId]: { ...prev[recipeId], notes: (prev[recipeId]?.notes || []).filter(note => note.id !== noteId )}
     }))
     }
 

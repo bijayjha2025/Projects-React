@@ -126,7 +126,7 @@ const RecipeNotesSection = ({ recipeId }) => {
             <textarea value={editText} onChange={(e) => setEditText(e.target.value)} rows={2} className="w-full px-3 py-2 border border-gray-300 rounded font-share mb-2" />
             <div className="flex gap-2">
              <button onClick={handleSaveEdit} className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 text-sm font-share">Save</button>
-             <button onClick={setEditingNote} className='px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 text-sm font-share'>Cancel</button>
+             <button onClick={() => setEditingNote(null)} className='px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 text-sm font-share'>Cancel</button>
             </div>
            </div>
           ) : (
@@ -135,8 +135,8 @@ const RecipeNotesSection = ({ recipeId }) => {
            <div className="flex justify-between items-center">
             <p className="text-xs text-gray-500 font-share">{formatDate(note.date)}{note.edited && ' (edited)'}</p>
              <div className="flex gap-2">
-              <button onClick={handleEditNote(note)} className="text-blue-600 hover:text-blue-800 text-sm font-share">Edit</button>
-              <button onClick={deleteNote(recipeId, note.id)} className="text-red-600 hover:text-red-800 text-sm font-share">Delete</button>
+              <button onClick={() => handleEditNote(note)} className="text-blue-600 hover:text-blue-800 text-sm font-share">Edit</button>
+              <button onClick={() => deleteNote(recipeId, note.id)} className="text-red-600 hover:text-red-800 text-sm font-share">Delete</button>
              </div>
             </div>
            </>  )}
