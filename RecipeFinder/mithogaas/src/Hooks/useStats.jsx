@@ -31,7 +31,7 @@ export const useStats = () => {
     localStorage.setItem('viewingHistory', JSON.stringify(updatedHistory));
   };
 
-  const getRecipeWithNotes = () => {
+  const getRecipesWithNotes = () => {
     try{
       const notes = localStorage.getItem('recipeNotes');
       return notes ? Object.keys(JSON.parse(notes)) : [];
@@ -43,12 +43,12 @@ export const useStats = () => {
   const calculateStats = () => {
     const viewingHistory = getViewingHistory();
     const mealPlanRecipes = getMealPlanRecipes();
-    const recipeWithNotes = getRecipeWithNotes();
+    const recipesWithNotes = getRecipesWithNotes();
 
     const totalViewed = new Set(viewingHistory.map(v => v.recipeId)).size;
     const totalFavorites = favorites.length;
     const totalPlanned = mealPlanRecipes.length;
-    const totalCustomized = recipeWithNotes.length;
+    const totalCustomized = recipesWithNotes.length;
 
     const categoryBreakdown = favorites.reduce((acc, recipe) => {
       acc[recipe.strCategory] = (acc[recipe.strCategory] || 0) + 1;
