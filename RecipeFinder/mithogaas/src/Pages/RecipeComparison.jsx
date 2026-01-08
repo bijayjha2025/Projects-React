@@ -94,7 +94,8 @@ const RecipeComparison = () => {
 
       <div className="max-w-7xl mx-auto px-4">
        {activeTab === "overview" && (
-         <div className="grid gap-6 animate-fadeSlideUp" style={{gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
+        <div className="overflow-x-auto">
+         <div className="grid gap-6 animate-fadeSlideUp min-w-[640px]" style={{gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
           {comparisonList.map((recipe, index) => {
           const ingredients = getIngredients(recipe);
           const stepCount = getStepCount(recipe);
@@ -102,8 +103,7 @@ const RecipeComparison = () => {
 
           return (
            <div key={recipe.idMeal} className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 ${ isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8' }`} style={{ transitionDelay: `${index * 150}ms` }} >
-
-            <div className="relative group">
+            <div className="relative">
              <img src={recipe.strMealThumb} alt={recipe.strMeal} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"/>
              <button onClick={() => removeFromComparison(recipe.idMeal)} className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition-all duration-300 hover:scale-110">✕</button>
             </div>
@@ -111,7 +111,7 @@ const RecipeComparison = () => {
             <div className="p-6">
              <h3 className="text-xl font-bold mb-3 font-share">{recipe.strMeal}</h3>
              <div className="space-y-3 mb-4">
-             <div className="flex justify-between py-2 border-b border-gray-200">
+              <div className="flex justify-between py-2 border-b border-gray-200">
               <span className="text-gray-600 font-share">Category</span>
               <span className="font-semibold font-share">{recipe.strCategory}</span>
              </div>
@@ -130,6 +130,7 @@ const RecipeComparison = () => {
               <span className="text-gray-600 font-share">Steps</span>
               <span className="font-semibold font-share">{stepCount}</span>
              </div>
+        
 
              {cookingTime && (
               <div className="flex justify-between py-2 border-b border-gray-200">
@@ -150,12 +151,15 @@ const RecipeComparison = () => {
               <Link to={`/recipe/${recipe.idMeal}`} className="flex-1 px-4 py-2 bg-[#a7f1a0] text-black text-center font-semibold rounded-lg hover:bg-[#58e633] transition-colors font-share text-sm">View Full Recipe</Link>
              </div>
             </div>
-           </div> ); })};
+          </div>
+           );})}
+           </div>
           </div>
         )}
 
         {activeTab === "ingredients" && (
-         <div className='animate-fadeSlideUp'>
+        <div className="overflow-x-auto">
+         <div className='animate-fadeSlideUp min-w-[640px]'>
           {commonIngredients.length > 0 && (
            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-bold mb-3 font-share text-green-800">🎯 Common Ingredients ({commonIngredients.length})</h3>
@@ -184,13 +188,15 @@ const RecipeComparison = () => {
                  </li> )})}
                 </ul>
                 </div>
-                )})}
+                );})}
             </div>
+          </div>
           </div>
         )}
 
         {activeTab === "instructions" && (
-         <div className="grid gap-6 animate-fadeSlideUp" style={{ gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
+         <div className="overflow-x-auto">
+          <div className="grid gap-6 animate-fadeSlideUp min-w-[640px]" style={{ gridTemplateColumns: `repeat(${comparisonList.length}, 1fr)`, }}>
           {comparisonList.map((recipe, index) => {
            const steps = recipe.strInstructions
             .split("\n")
@@ -206,11 +212,12 @@ const RecipeComparison = () => {
                 </li> ))}
                </ol>
               </div>
-              )})}
-          </div>)}
+              );})}
+          </div>
       </div>
-    </div>
-  );
-};
+  )}
+  </div>
+  </div>
+  )}
 
 export default RecipeComparison;

@@ -275,11 +275,13 @@ const ShoppingList = ({ onClose }) => {
     </div>
 
     {shoppingList.length > 0 && (
-     <div className='bg-gray-50 px-6 py-4 flex gap-3 no-print'>
+     <div className='bg-gray-50 px-6 py-4'>
+      <div className="flex flex-col sm:flex-row gap-3">
       <button onClick={handlePrintClick} className='flex-1 px-6 py-3 bg-[#a7f1a0] text-black font-semibold rounded-lg hover:bg-[#58e633] hover:scale-105 transition-all font-share text-center'>🖨️ Print</button>
       <button onClick={handleExportCSVClick} className='flex-1 min-w-[120px] px-6 py-3 bg-blue-100 text-blue-700 font-semibold rounded-lg hover:bg-blue-200 hover:scale-105 transition-all font-share text-center'>📊 Export CSV</button>
       <button onClick={handleCopyClick} className='flex-1 min-w-[120px] px-6 py-3 text-center bg-amber-200 font-semibold rounded-lg hover:bg-amber-500 hover:scale-105 transition-all font-share'>📋 Copy</button>
       <button onClick={onClose} className='flex-1 min-w-[120px] px-6 py-3 bg-gray-200 text-gray-700 text-center font-semibold rounded-lg hover:bg-gray-300 transition-colors font-share'>Close</button>
+      </div>
      </div>
     )}
    </div>
