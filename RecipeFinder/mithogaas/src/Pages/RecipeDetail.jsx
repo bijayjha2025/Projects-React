@@ -5,6 +5,7 @@ import { useMealPlanner } from "../Hooks/useMealPlanner.jsx";
 import { RecipeDetailSkeleton } from "../Components/Skeletons.jsx";
 import { useRecipeNotes } from "../Hooks/useRecipeNotes.jsx";
 import RecipeNotesSection from "../Components/RecipeNotesSection.jsx";
+import { useStats } from "../Hooks/useStats.jsx";
 
 const RecipeDetail = () => {
     const {id} = useParams();
@@ -16,7 +17,7 @@ const RecipeDetail = () => {
     const { addRecipeToDay, isRecipeInPlan } = useMealPlanner();
 
     const {hasCustomizations} = useRecipeNotes();
-    const {trackRecipeView} = useState();
+    const {trackRecipeView} = useStats();
     
 
     useEffect(() => {
