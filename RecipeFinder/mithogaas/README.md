@@ -174,8 +174,8 @@ Statistics Dashboard
 ________________________________________
 Author
 Your Name
-•	GitHub: @yourusername
-•	LinkedIn: Your Name
+•	GitHub: bijayjha2025
+•	LinkedIn: Bijay Jha
 ________________________________________
 Acknowledgments
 •	Recipe data provided by TheMealDB API
