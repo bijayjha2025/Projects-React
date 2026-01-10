@@ -106,6 +106,8 @@
 
 
 ## Project Structure
+
+```text
 mithogaas/
 ├── public/
 ├── src/
@@ -138,11 +140,12 @@ mithogaas/
 ├── index.html
 ├── package.json
 └── vite.config.js
+```
 
 ## Responsive Breakpoints
-Mobile:    < 640px
-Tablet:    640px - 1024px
-Desktop:   > 1024px
+- Mobile:    < 640px
+- Tablet:    640px - 1024px
+- Desktop:   > 1024px
 
 ## Key Features Explained
 ### Meal Planning
